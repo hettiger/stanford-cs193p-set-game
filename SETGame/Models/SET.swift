@@ -32,6 +32,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         var isMatched = false
     }
 
+    private var randomSource: RandomSource
     private(set) var state = State.noCardsSelected
     private(set) var cards: Cards
 
@@ -51,11 +52,12 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             }
         }
         self.cards = Cards(cards.shuffled(using: randomSource))
+        self.randomSource = randomSource
     }
     
     mutating func deal() {
-        for i in 0 ..< 12 {
-            cards[i].isDealt = true
+        for index in Array(cards.indices).shuffled(using: randomSource).prefix(12) {
+            cards[index].isDealt = true
         }
     }
 }
