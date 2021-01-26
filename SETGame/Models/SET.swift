@@ -20,7 +20,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         case threeCardsSelected(Card, Card, Card)
     }
     
-    typealias Cards = OrderedSet<Card>
+    typealias Cards = [Card]
 
     struct Card: Hashable {
         var color: ColorType
@@ -51,5 +51,11 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             }
         }
         self.cards = Cards(cards.shuffled(using: randomSource))
+    }
+    
+    mutating func deal() {
+        for i in 0 ..< 12 {
+            cards[i].isDealt = true
+        }
     }
 }

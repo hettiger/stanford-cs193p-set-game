@@ -77,4 +77,10 @@ class SETTests: XCTestCase {
     func test_state_is_no_cards_selected() {
         XCTAssert(sut.state == .noCardsSelected)
     }
+    
+    func test_when_no_cards_have_been_dealt_deal_sets_12_to_be_dealt() {
+        sut.deal()
+
+        XCTAssert(sut.cards.filter(\.isDealt).count == 12)
+    }
 }
