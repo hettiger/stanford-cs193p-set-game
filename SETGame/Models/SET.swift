@@ -13,13 +13,13 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     ShapeType: Hashable, ShapeType: CaseIterable,
     ShadingType: Hashable, ShadingType: CaseIterable
 {
-    enum State: Hashable {
-        case noCardsSelected
-        case oneCardSelected(Card)
-        case twoCardsSelected(Card, Card)
-        case threeCardsSelected(Card, Card, Card)
+    enum Selection: Hashable {
+        case none
+        case one(Card)
+        case two(Card, Card)
+        case three(Card, Card, Card)
     }
-    
+
     typealias Cards = [Card]
 
     struct Card: Hashable {
@@ -33,7 +33,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     private var randomSource: RandomSource
-    private(set) var state = State.noCardsSelected
+    private(set) var selection = Selection.none
     private(set) var cards: Cards
 
     init(
@@ -54,7 +54,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         self.cards = Cards(cards.shuffled(using: randomSource))
         self.randomSource = randomSource
     }
-    
+
     mutating func deal() {
         for index in Array(cards.indices).shuffled(using: randomSource).prefix(12) {
             cards[index].isDealt = true
