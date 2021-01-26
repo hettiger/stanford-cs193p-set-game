@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B4F52CC25C07F250036EEBF /* SETGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CB25C07F250036EEBF /* SETGameApp.swift */; };
+		5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CB25C07F250036EEBF /* SETGame.swift */; };
 		5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CD25C07F250036EEBF /* ContentView.swift */; };
 		5B4F52D025C07F270036EEBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F52CF25C07F270036EEBF /* Assets.xcassets */; };
 		5B4F52D325C07F270036EEBF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F52D225C07F270036EEBF /* Preview Assets.xcassets */; };
@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		5B4F52C825C07F250036EEBF /* SETGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SETGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B4F52CB25C07F250036EEBF /* SETGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SETGameApp.swift; sourceTree = "<group>"; };
+		5B4F52CB25C07F250036EEBF /* SETGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SETGame.swift; sourceTree = "<group>"; };
 		5B4F52CD25C07F250036EEBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5B4F52CF25C07F270036EEBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B4F52D225C07F270036EEBF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -95,11 +95,11 @@
 		5B4F52CA25C07F250036EEBF /* SETGame */ = {
 			isa = PBXGroup;
 			children = (
-				5B4F52CB25C07F250036EEBF /* SETGameApp.swift */,
-				5B4F52CD25C07F250036EEBF /* ContentView.swift */,
-				5B4F52CF25C07F270036EEBF /* Assets.xcassets */,
 				5B4F52D425C07F270036EEBF /* Info.plist */,
+				5B4F52CB25C07F250036EEBF /* SETGame.swift */,
+				5B4F52CF25C07F270036EEBF /* Assets.xcassets */,
 				5B4F52D125C07F270036EEBF /* Preview Content */,
+				5B4F530125C07FAD0036EEBF /* User Interface */,
 			);
 			path = SETGame;
 			sourceTree = "<group>";
@@ -115,7 +115,7 @@
 		5B4F52DC25C07F270036EEBF /* SETGameTests */ = {
 			isa = PBXGroup;
 			children = (
-				5B4F52DD25C07F270036EEBF /* SETGameTests.swift */,
+				5B4F52FC25C07F890036EEBF /* Cases */,
 				5B4F52DF25C07F270036EEBF /* Info.plist */,
 			);
 			path = SETGameTests;
@@ -124,10 +124,42 @@
 		5B4F52E725C07F270036EEBF /* SETGameUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5B4F52E825C07F270036EEBF /* SETGameUITests.swift */,
+				5B4F52FD25C07F910036EEBF /* Cases */,
 				5B4F52EA25C07F270036EEBF /* Info.plist */,
 			);
 			path = SETGameUITests;
+			sourceTree = "<group>";
+		};
+		5B4F52FC25C07F890036EEBF /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				5B4F52DD25C07F270036EEBF /* SETGameTests.swift */,
+			);
+			path = Cases;
+			sourceTree = "<group>";
+		};
+		5B4F52FD25C07F910036EEBF /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				5B4F52E825C07F270036EEBF /* SETGameUITests.swift */,
+			);
+			path = Cases;
+			sourceTree = "<group>";
+		};
+		5B4F530125C07FAD0036EEBF /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				5B4F530225C07FB20036EEBF /* Views */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		5B4F530225C07FB20036EEBF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B4F52CD25C07F250036EEBF /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */,
-				5B4F52CC25C07F250036EEBF /* SETGameApp.swift in Sources */,
+				5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

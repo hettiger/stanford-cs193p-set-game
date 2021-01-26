@@ -1,5 +1,5 @@
 //
-//  SETGameApp.swift
+//  SETGame.swift
 //  SETGame
 //
 //  Created by Martin Hettiger on 26.01.21.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct SETGameApp: App {
+struct SETGame: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
