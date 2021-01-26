@@ -42,7 +42,7 @@ class SETTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_it_initializes_with_cards_for_all_possible_combinations() {
+    func test_cards_contains_all_possible_cards_combinations() {
         XCTAssert(sut.cards.count == 81)
     }
     
@@ -60,5 +60,21 @@ class SETTests: XCTestCase {
         
         XCTAssert(sut.cards.count == 3)
         XCTAssert(expectedCards == sut.cards)
+    }
+    
+    func test_cards_are_not_dealt() {
+        XCTAssert(sut.cards.filter(\.isDealt).count == 0)
+    }
+    
+    func test_cards_are_not_selected() {
+        XCTAssert(sut.cards.filter(\.isSelected).count == 0)
+    }
+    
+    func test_cards_are_not_matched() {
+        XCTAssert(sut.cards.filter(\.isMatched).count == 0)
+    }
+    
+    func test_state_is_no_cards_selected() {
+        XCTAssert(sut.state == .noCardsSelected)
     }
 }
