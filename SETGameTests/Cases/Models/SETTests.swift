@@ -81,6 +81,65 @@ class SETTests: XCTestCase {
         XCTAssert(sut.cards.prefix(expectedCount).filter(\.isDealt).count == expectedCount)
     }
 
+    // MARK: - Card Visibility
+
+    func withCard(_ card: SETFake.Card) {
+        randomSourceFake.shuffle = { _ in
+            [card]
+        }
+        sut = SETFake(randomSource: randomSourceFake)
+    }
+
+    func test_card_is_not_visible() {
+        XCTAssert(sut.cards[0].isVisible == false)
+    }
+
+    func test_when_card_is_selected_card_is_not_visible() {
+        sut.select(sut.cards[0])
+
+        XCTAssert(sut.cards[0].isVisible == false)
+    }
+
+    func test_when_card_is_matched_card_is_not_visible() {
+        var card = sut.cards[0]
+        card.isMatched = true
+        withCard(card)
+
+        XCTAssert(sut.cards[0].isVisible == false)
+    }
+
+    func test_when_card_is_dealt_card_is_visible() {
+        sut.deal()
+
+        XCTAssert(sut.cards[0].isVisible == true)
+    }
+
+    func test_when_card_is_dealt_and_selected_card_is_visible() {
+        sut.deal()
+        sut.select(sut.cards[0])
+
+        XCTAssert(sut.cards[0].isVisible == true)
+    }
+
+    func test_when_card_is_dealt_and_matched_card_is_not_visible() {
+        var card = sut.cards[0]
+        card.isDealt = true
+        card.isMatched = true
+        withCard(card)
+
+        XCTAssert(sut.cards[0].isVisible == false)
+    }
+
+    func test_when_card_is_dealt_matched_and_selected_card_is_visible() {
+        var card = sut.cards[0]
+        card.isDealt = true
+        card.isSelected = true
+        card.isMatched = true
+        withCard(card)
+
+        XCTAssert(sut.cards[0].isVisible == true)
+    }
+
     // MARK: - Selecting and Deselecting Cards
 
     func test_when_one_card_is_selected_cards_contains_one_card_with_is_selected_set_to_true() {
@@ -196,15 +255,47 @@ class SETTests: XCTestCase {
         XCTAssert(sut.selection.isMatch == false)
     }
 
-    func test_when_selection_is_three_returns_true_on_1080_of_all_possible_combinations() {
-        let cardCombinations = sut.cards.combinations(ofCount: 3)
-        var sets = Set<Set<SETFake.Card>>()
-        for cards in cardCombinations {
-            let selection = SETFake.Selection.three(cards[0], cards[1], cards[2])
-            if selection.isMatch {
-                sets.insert(Set([cards[0], cards[1], cards[2]]))
-            }
+    func test_when_selection_is_three_and_cards_are_a_set_isMatch_returns_true() {
+        let selection = SETFake.Selection.three(
+            SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            SETFake.Card(color: .purple, number: .two, shape: .oval, shading: .solid),
+            SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped)
+        )
+
+        XCTAssert(selection.isMatch == true)
+    }
+
+    func test_when_selection_is_three_but_cards_are_not_a_set_isMatch_returns_false() {
+        let selection = SETFake.Selection.three(
+            SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            SETFake.Card(color: .green, number: .two, shape: .oval, shading: .solid),
+            SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped)
+        )
+
+        XCTAssert(selection.isMatch == false)
+    }
+
+    // MARK: - Number of Visible SETs
+
+    func test_when_all_cards_are_visible_numberOfVisibleSETs_calls_back_with_1080_on_main_thread() {
+        randomSourceFake.shuffle = { cards in cards.map { card in
+            var card = card as! SETFake.Card
+            card.isDealt = true
+            return card
+        }}
+        sut = SETFake(randomSource: randomSourceFake)
+        let exp = expectation(description: "numberOfVisibleSETs calls callback with result")
+
+        var actualNumberOfVisibleSETs: Int?
+        var thread: Thread!
+        sut.numberOfVisibleSETs { result in
+            actualNumberOfVisibleSETs = result
+            thread = Thread.current
+            exp.fulfill()
         }
-        XCTAssert(sets.count == 1080)
+
+        wait(for: [exp], timeout: 2)
+        XCTAssert(actualNumberOfVisibleSETs == 1080)
+        XCTAssert(thread.isMainThread == true)
     }
 }

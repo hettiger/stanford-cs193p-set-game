@@ -5,6 +5,7 @@
 //  Created by Martin Hettiger on 26.01.21.
 //
 
+import Algorithms
 import Foundation
 
 struct SET<ColorType, NumberType, ShapeType, ShadingType> where
@@ -50,6 +51,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         var isDealt = false
         var isSelected = false
         var isMatched = false
+        var isVisible: Bool { isDealt && (!isMatched || isSelected && isMatched) }
     }
 
     private(set) var selection = Selection.none
@@ -71,6 +73,22 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             }
         }
         self.cards = Cards(cards.shuffled(using: randomSource))
+    }
+
+    func numberOfVisibleSETs(_ callback: @escaping (Int) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let cardCombinations = cards.filter(\.isVisible).combinations(ofCount: 3)
+            var numberOfVisibleSETs = 0
+            for cards in cardCombinations {
+                let selection = Selection.three(cards[0], cards[1], cards[2])
+                if selection.isMatch {
+                    numberOfVisibleSETs += 1
+                }
+            }
+            DispatchQueue.main.async {
+                callback(numberOfVisibleSETs)
+            }
+        }
     }
 
     mutating func deal() {

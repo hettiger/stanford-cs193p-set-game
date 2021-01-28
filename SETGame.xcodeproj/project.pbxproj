@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B3F097B25C32FFA00A00FFF /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 5B3F097A25C32FFA00A00FFF /* Algorithms */; };
 		5B3F098C25C35A4200A00FFF /* SETFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F098B25C35A4200A00FFF /* SETFake.swift */; };
+		5B3F09A025C35FAA00A00FFF /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 5B3F099F25C35FAA00A00FFF /* Algorithms */; };
 		5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CB25C07F250036EEBF /* SETGame.swift */; };
 		5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CD25C07F250036EEBF /* ContentView.swift */; };
 		5B4F52D025C07F270036EEBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F52CF25C07F270036EEBF /* Assets.xcassets */; };
@@ -65,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B3F09A025C35FAA00A00FFF /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B3F097B25C32FFA00A00FFF /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +86,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B3F099825C35F6700A00FFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5B4F52BF25C07F250036EEBF = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +100,7 @@
 				5B4F52DC25C07F270036EEBF /* SETGameTests */,
 				5B4F52E725C07F270036EEBF /* SETGameUITests */,
 				5B4F52C925C07F250036EEBF /* Products */,
+				5B3F099825C35F6700A00FFF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -231,6 +239,7 @@
 			);
 			name = SETGame;
 			packageProductDependencies = (
+				5B3F099F25C35FAA00A00FFF /* Algorithms */,
 			);
 			productName = SETGame;
 			productReference = 5B4F52C825C07F250036EEBF /* SETGame.app */;
@@ -251,7 +260,6 @@
 			);
 			name = SETGameTests;
 			packageProductDependencies = (
-				5B3F097A25C32FFA00A00FFF /* Algorithms */,
 			);
 			productName = SETGameTests;
 			productReference = 5B4F52D925C07F270036EEBF /* SETGameTests.xctest */;
@@ -307,7 +315,7 @@
 			);
 			mainGroup = 5B4F52BF25C07F250036EEBF;
 			packageReferences = (
-				5B3F097925C32FFA00A00FFF /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				5B3F099E25C35FA900A00FFF /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 5B4F52C925C07F250036EEBF /* Products */;
 			projectDirPath = "";
@@ -680,7 +688,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5B3F097925C32FFA00A00FFF /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+		5B3F099E25C35FA900A00FFF /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms";
 			requirement = {
@@ -691,9 +699,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5B3F097A25C32FFA00A00FFF /* Algorithms */ = {
+		5B3F099F25C35FAA00A00FFF /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5B3F097925C32FFA00A00FFF /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			package = 5B3F099E25C35FA900A00FFF /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
