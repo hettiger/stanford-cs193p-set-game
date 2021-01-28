@@ -69,29 +69,29 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     mutating func select(_ selectedCard: Card) {
         switch selection {
         case .none:
-            setCardValue(\.isSelected, to: true, for: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .one(selectedCard)
         case let .one(card) where card == selectedCard:
-            setCardValue(\.isSelected, to: false, for: [selectedCard])
+            setValue(false, forKey: \.isSelected, of: [selectedCard])
             selection = .none
         case let .one(card):
-            setCardValue(\.isSelected, to: true, for: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .two(card, selectedCard)
         case let .two(cardA, cardB) where cardA == selectedCard || cardB == selectedCard:
-            setCardValue(\.isSelected, to: false, for: [selectedCard])
+            setValue(false, forKey: \.isSelected, of: [selectedCard])
             selection = .one(cardB)
         case let .two(cardA, cardB):
-            setCardValue(\.isSelected, to: true, for: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .three(cardA, cardB, selectedCard)
         default:
             break
         }
     }
 
-    private mutating func setCardValue<Value>(
-        _ keyPath: WritableKeyPath<Card, Value>,
-        to value: Value,
-        for cards: Cards
+    private mutating func setValue<Value>(
+        _ value: Value,
+        forKey keyPath: WritableKeyPath<Card, Value>,
+        of cards: Cards
     ) {
         for card in cards {
             self.cards[self.cards.firstIndex(of: card)!][keyPath: keyPath] = value
