@@ -9,32 +9,14 @@ import Algorithms
 @testable import SETGame
 import XCTest
 
-typealias OriginalSET = SET<ColorTypeFake, NumberTypeFake, ShapeTypeFake, ShadingTypeFake>
-
-enum ColorTypeFake: Hashable, CaseIterable {
-    case red, green, purple
-}
-
-enum NumberTypeFake: Hashable, CaseIterable {
-    case one, two, three
-}
-
-enum ShapeTypeFake: Hashable, CaseIterable {
-    case diamond, squiggle, oval
-}
-
-enum ShadingTypeFake: Hashable, CaseIterable {
-    case solid, striped, open
-}
-
 class SETTests: XCTestCase {
     var randomSourceFake: RandomSourceFake!
-    var sut: OriginalSET!
+    var sut: SETFake!
 
     override func setUp() {
         super.setUp()
         randomSourceFake = RandomSourceFake()
-        sut = OriginalSET(randomSource: randomSourceFake)
+        sut = SETFake(randomSource: randomSourceFake)
     }
 
     override func tearDown() {
@@ -50,16 +32,16 @@ class SETTests: XCTestCase {
     }
 
     func test_cards_are_in_random_order() {
-        var expectedCards = [OriginalSET.Card]()
+        var expectedCards = [SETFake.Card]()
 
         randomSourceFake.shuffle = { cards in
-            let cards = cards as! [OriginalSET.Card]
+            let cards = cards as! [SETFake.Card]
             XCTAssert(cards.count == 81)
             expectedCards = [cards[10], cards[11], cards[12]]
             return expectedCards
         }
 
-        sut = OriginalSET(randomSource: randomSourceFake)
+        sut = SETFake(randomSource: randomSourceFake)
 
         XCTAssert(expectedCards == sut.cards)
     }
@@ -181,12 +163,12 @@ class SETTests: XCTestCase {
     func test_when_match_is_selected_corresponding_cards_are_marked_to_be_matched() {
         randomSourceFake.shuffle = { _ in
             [
-                OriginalSET.Card(color: .green, number: .one, shape: .diamond, shading: .open),
-                OriginalSET.Card(color: .purple, number: .two, shape: .oval, shading: .solid),
-                OriginalSET.Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+                SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
+                SETFake.Card(color: .purple, number: .two, shape: .oval, shading: .solid),
+                SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
             ]
         }
-        sut = OriginalSET(randomSource: randomSourceFake)
+        sut = SETFake(randomSource: randomSourceFake)
 
         sut.select(sut.cards[0])
         sut.select(sut.cards[1])
@@ -216,9 +198,9 @@ class SETTests: XCTestCase {
 
     func test_when_selection_is_three_returns_true_on_1080_of_all_possible_combinations() {
         let cardCombinations = sut.cards.combinations(ofCount: 3)
-        var sets = Set<Set<OriginalSET.Card>>()
+        var sets = Set<Set<SETFake.Card>>()
         for cards in cardCombinations {
-            let selection = OriginalSET.Selection.three(cards[0], cards[1], cards[2])
+            let selection = SETFake.Selection.three(cards[0], cards[1], cards[2])
             if selection.isMatch {
                 sets.insert(Set([cards[0], cards[1], cards[2]]))
             }
