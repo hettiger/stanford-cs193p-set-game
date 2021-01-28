@@ -76,7 +76,15 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     mutating func deal() {
-        setValue(true, forKey: \.isDealt, of: Array(cards.prefix(12)))
+        guard let firstUndealtCardIndex = cards.firstIndex(where: { !$0.isDealt })
+        else { return }
+
+        guard firstUndealtCardIndex != cards.startIndex
+        else { setValue(true, forKey: \.isDealt, of: Array(cards.prefix(12))); return }
+
+        let lastCardToBeDealtIndex = firstUndealtCardIndex.advanced(by: 2)
+        let cardsToBeDealt = Array(cards[firstUndealtCardIndex ... lastCardToBeDealtIndex])
+        setValue(true, forKey: \.isDealt, of: cardsToBeDealt)
     }
 
     mutating func select(_ selectedCard: Card) {

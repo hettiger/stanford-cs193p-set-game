@@ -85,7 +85,18 @@ class SETTests: XCTestCase {
     func test_when_no_cards_have_been_dealt_deal_sets_first_12_cards_to_be_dealt() {
         sut.deal()
 
+        XCTAssert(sut.cards.filter(\.isDealt).count == 12)
         XCTAssert(sut.cards.prefix(12).filter(\.isDealt).count == 12)
+    }
+
+    func test_when_there_are_dealt_cards_continues_dealing_3_cards() {
+        let expectedCount = 12 + 3
+        sut.deal()
+
+        sut.deal()
+
+        XCTAssert(sut.cards.filter(\.isDealt).count == expectedCount)
+        XCTAssert(sut.cards.prefix(expectedCount).filter(\.isDealt).count == expectedCount)
     }
 
     // MARK: - Selecting and Deselecting Cards
