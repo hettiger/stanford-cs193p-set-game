@@ -52,7 +52,6 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         var isMatched = false
     }
 
-    private var randomSource: RandomSource
     private(set) var selection = Selection.none
     private(set) var cards: Cards
 
@@ -72,7 +71,6 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             }
         }
         self.cards = Cards(cards.shuffled(using: randomSource))
-        self.randomSource = randomSource
     }
 
     mutating func deal() {
