@@ -82,19 +82,10 @@ class SETTests: XCTestCase {
 
     // MARK: - Dealing Cards
 
-    func test_when_no_cards_have_been_dealt_deal_sets_12_random_cards_to_be_dealt() {
-        var didShuffleIndices = false
-
-        randomSourceFake.shuffle = { indices in
-            didShuffleIndices = indices is [Int]
-            return indices
-        }
-
+    func test_when_no_cards_have_been_dealt_deal_sets_first_12_cards_to_be_dealt() {
         sut.deal()
-        let dealtCards = sut.cards.filter(\.isDealt)
 
-        XCTAssert(dealtCards.count == 12)
-        XCTAssert(didShuffleIndices)
+        XCTAssert(sut.cards.prefix(12).filter(\.isDealt).count == 12)
     }
 
     // MARK: - Selecting and Deselecting Cards

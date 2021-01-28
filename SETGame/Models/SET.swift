@@ -76,9 +76,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     mutating func deal() {
-        for index in Array(cards.indices).shuffled(using: randomSource).prefix(12) {
-            cards[index].isDealt = true
-        }
+        setValue(true, forKey: \.isDealt, of: Array(cards.prefix(12)))
     }
 
     mutating func select(_ selectedCard: Card) {
