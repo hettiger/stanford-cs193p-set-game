@@ -5,6 +5,7 @@
 //  Created by Martin Hettiger on 26.01.21.
 //
 
+import Algorithms
 @testable import SETGame
 import XCTest
 
@@ -173,5 +174,36 @@ class SETTests: XCTestCase {
         sut.select(sut.cards[2])
 
         XCTAssert(sut.selection == .three(sut.cards[0], sut.cards[1], sut.cards[2]))
+    }
+
+    // MARK: - Selection Is Match Check
+
+    func test_when_selection_is_none_is_match_returns_false() {
+        XCTAssert(sut.selection.isMatch == false)
+    }
+
+    func test_when_selection_is_one_is_match_returns_false() {
+        sut.select(sut.cards[0])
+
+        XCTAssert(sut.selection.isMatch == false)
+    }
+
+    func test_when_selection_is_two_is_match_returns_false() {
+        sut.select(sut.cards[0])
+        sut.select(sut.cards[1])
+
+        XCTAssert(sut.selection.isMatch == false)
+    }
+
+    func test_when_selection_is_three_returns_true_on_1080_of_all_possible_combinations() {
+        let cardCombinations = sut.cards.combinations(ofCount: 3)
+        var sets = Set<Set<OriginalSET.Card>>()
+        for cards in cardCombinations {
+            let selection = OriginalSET.Selection.three(cards[0], cards[1], cards[2])
+            if selection.isMatch {
+                sets.insert(Set([cards[0], cards[1], cards[2]]))
+            }
+        }
+        XCTAssert(sets.count == 1080)
     }
 }

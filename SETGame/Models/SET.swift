@@ -18,6 +18,21 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         case one(Card)
         case two(Card, Card)
         case three(Card, Card, Card)
+
+        /// Returns true if is selection of three cards where all of the selected cards features,
+        /// looked at one-by-one, are the same on each card, or, are different on each card.
+        var isMatch: Bool {
+            switch self {
+            case let .three(cardA, cardB, cardC):
+                let colors = Set([cardA.color, cardB.color, cardC.color])
+                let numbers = Set([cardA.number, cardB.number, cardC.number])
+                let shapes = Set([cardA.shape, cardB.shape, cardC.shape])
+                let shades = Set([cardA.shading, cardB.shading, cardC.shading])
+                return ![colors.count, numbers.count, shapes.count, shades.count].contains(2)
+            default:
+                return false
+            }
+        }
     }
 
     typealias Cards = [Card]
