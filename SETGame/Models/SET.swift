@@ -77,14 +77,13 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
 
     func numberOfVisibleSETs(_ callback: @escaping (Int) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
-            let cardCombinations = cards.filter(\.isVisible).combinations(ofCount: 3)
-            var numberOfVisibleSETs = 0
-            for cards in cardCombinations {
-                let selection = Selection.three(cards[0], cards[1], cards[2])
-                if selection.isMatch {
-                    numberOfVisibleSETs += 1
-                }
-            }
+            let numberOfVisibleSETs = cards
+                .filter(\.isVisible)
+                .combinations(ofCount: 3)
+                .map { cards in Selection.three(cards[0], cards[1], cards[2]) }
+                .filter(\.isMatch)
+                .count
+
             DispatchQueue.main.async {
                 callback(numberOfVisibleSETs)
             }
