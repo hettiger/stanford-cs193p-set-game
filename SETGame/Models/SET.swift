@@ -97,14 +97,10 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
 
     mutating func select(_ selectedCard: Card) {
         switch cardsSelected.count {
-        case 0:
-            setValue(true, forKey: \.isSelected, of: [selectedCard])
-        case 1 where cardsSelected.contains(selectedCard):
+        case 1 ... 2 where cardsSelected.contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: [selectedCard])
-        case 1:
+        case 0 ... 1:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-        case 2 where cardsSelected.contains(selectedCard):
-            setValue(false, forKey: \.isSelected, of: [selectedCard])
         case 2:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
             setValue(
