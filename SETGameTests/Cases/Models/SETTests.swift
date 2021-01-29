@@ -10,6 +10,8 @@ import Algorithms
 import XCTest
 
 class SETTests: XCTestCase {
+    typealias Card = SETFake.Card
+
     var randomSourceFake: RandomSourceFake!
     var sut: SETFake!
 
@@ -27,11 +29,11 @@ class SETTests: XCTestCase {
 
     // MARK: - State
 
-    func withCard(_ card: SETFake.Card) {
+    func withCard(_ card: Card) {
         withCards([card])
     }
 
-    func withCards(_ cards: [SETFake.Card]) {
+    func withCards(_ cards: [Card]) {
         randomSourceFake.shuffle = { _ in
             cards
         }
@@ -40,10 +42,10 @@ class SETTests: XCTestCase {
 
     func withThreeNonMatchingCardsSelected() {
         withCards([
-            SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
-            SETFake.Card(color: .green, number: .two, shape: .oval, shading: .solid),
-            SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
-            SETFake.Card(color: .purple, number: .three, shape: .squiggle, shading: .striped),
+            Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            Card(color: .green, number: .two, shape: .oval, shading: .solid),
+            Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+            Card(color: .purple, number: .three, shape: .squiggle, shading: .striped),
         ])
         sut.select(sut.cards[0])
         sut.select(sut.cards[1])
@@ -57,10 +59,10 @@ class SETTests: XCTestCase {
     }
 
     func test_cards__returns_cards_in_random_order() {
-        var expectedCards = [SETFake.Card]()
+        var expectedCards = [Card]()
 
         randomSourceFake.shuffle = { cards in
-            let cards = cards as! [SETFake.Card]
+            let cards = cards as! [Card]
             XCTAssert(cards.count == 81)
             expectedCards = [cards[10], cards[11], cards[12]]
             return expectedCards
@@ -114,9 +116,9 @@ class SETTests: XCTestCase {
 
     func test_selection_isMatch__with_selection_three_and_cards_matching__returns_true() {
         let selection = SETFake.Selection.three(
-            SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
-            SETFake.Card(color: .purple, number: .two, shape: .oval, shading: .solid),
-            SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped)
+            Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            Card(color: .purple, number: .two, shape: .oval, shading: .solid),
+            Card(color: .red, number: .three, shape: .squiggle, shading: .striped)
         )
 
         XCTAssert(selection.isMatch == true)
@@ -124,9 +126,9 @@ class SETTests: XCTestCase {
 
     func test_selection_isMatch__with_selection_three_and_cards_not_matching__returns_false() {
         let selection = SETFake.Selection.three(
-            SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
-            SETFake.Card(color: .green, number: .two, shape: .oval, shading: .solid),
-            SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped)
+            Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            Card(color: .green, number: .two, shape: .oval, shading: .solid),
+            Card(color: .red, number: .three, shape: .squiggle, shading: .striped)
         )
 
         XCTAssert(selection.isMatch == false)
@@ -136,14 +138,14 @@ class SETTests: XCTestCase {
 
     func test_visibleSETs__with_all_cards_being_visible__calls_back_with_1080_SETs_on_main_thread() {
         randomSourceFake.shuffle = { cards in cards.map { card in
-            var card = card as! SETFake.Card
+            var card = card as! Card
             card.isDealt = true
             return card
         }}
         sut = SETFake(randomSource: randomSourceFake)
         let exp = expectation(description: "visibleSETs calls callback with result")
 
-        var actualVisibleSETs: [(SETFake.Card, SETFake.Card, SETFake.Card)]!
+        var actualVisibleSETs: [(Card, Card, Card)]!
         var thread: Thread!
         sut.visibleSETs { result in
             actualVisibleSETs = result
@@ -316,9 +318,9 @@ class SETTests: XCTestCase {
     ) {
         randomSourceFake.shuffle = { _ in
             [
-                SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
-                SETFake.Card(color: .purple, number: .two, shape: .oval, shading: .solid),
-                SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+                Card(color: .green, number: .one, shape: .diamond, shading: .open),
+                Card(color: .purple, number: .two, shape: .oval, shading: .solid),
+                Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
             ]
         }
         sut = SETFake(randomSource: randomSourceFake)
