@@ -52,6 +52,18 @@ class SETTests: XCTestCase {
         sut.select(sut.cards[2])
     }
 
+    func withThreeMatchingCardsSelected() {
+        withCards([
+            Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            Card(color: .purple, number: .two, shape: .oval, shading: .solid),
+            Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+            Card(color: .purple, number: .three, shape: .squiggle, shading: .striped),
+        ])
+        sut.select(sut.cards[0])
+        sut.select(sut.cards[1])
+        sut.select(sut.cards[2])
+    }
+
     // MARK: - Cards
 
     func test_cards__returns_all_possible_card_combinations() {
@@ -344,7 +356,6 @@ class SETTests: XCTestCase {
 
         XCTAssert(sut.cards.prefix(3).filter(\.isSelected).count == 0)
         XCTAssert(sut.cards.last!.isSelected == true)
-        XCTAssert(sut.selection == .one(anotherCard))
     }
 
     func test_select_another_card__with_three_non_matching_cards_selected__sets_selection_to_one() {
@@ -372,5 +383,42 @@ class SETTests: XCTestCase {
         sut.select(sut.cards[0])
 
         XCTAssert(sut.selection == .one(sut.cards[0]))
+    }
+
+    func test_select_another_card__with_three_matching_cards_selected__sets_another_card_isSelected_to_true_and_other_cards_isSelected_to_false(
+    ) {
+        withThreeMatchingCardsSelected()
+        let anotherCard = sut.cards[3]
+
+        sut.select(anotherCard)
+
+        XCTAssert(sut.cards.prefix(3).filter(\.isSelected).count == 0)
+        XCTAssert(sut.cards.last!.isSelected == true)
+    }
+
+    func test_select_another_card__with_three_matching_cards_selected__sets_selection_to_one() {
+        withThreeMatchingCardsSelected()
+        let anotherCard = sut.cards[3]
+
+        sut.select(anotherCard)
+
+        XCTAssert(sut.selection == .one(anotherCard))
+    }
+
+    func test_select_card_twice__with_three_matching_cards_selected__sets_all_three_cards_isSelected_to_false(
+    ) {
+        withThreeMatchingCardsSelected()
+
+        sut.select(sut.cards[0])
+
+        XCTAssert(sut.cards.filter(\.isSelected).count == 0)
+    }
+
+    func test_select_card_twice__with_three_matching_cards_selected__sets_selection_to_none() {
+        withThreeMatchingCardsSelected()
+
+        sut.select(sut.cards[0])
+
+        XCTAssert(sut.selection == .none)
     }
 }

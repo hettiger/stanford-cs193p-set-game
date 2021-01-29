@@ -114,7 +114,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         case let .one(card):
             setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .two(card, selectedCard)
-        case let .two(cardA, cardB) where cardA == selectedCard || cardB == selectedCard:
+        case let .two(cardA, cardB) where [cardA, cardB].contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: [selectedCard])
             selection = .one(cardB)
         case let .two(cardA, cardB):
@@ -125,8 +125,10 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
             setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .one(selectedCard)
-        default:
-            break
+        case let .three(cardA, cardB, cardC):
+            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
+            selection = [cardA, cardB, cardC].contains(selectedCard) ? .none : .one(selectedCard)
         }
     }
 
