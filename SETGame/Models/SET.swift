@@ -32,10 +32,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         var isVisible: Bool { isDealt && (!isMatched || isSelected && isMatched) }
     }
 
-    var cardsDealt: Cards { cards.filter(\.isDealt) }
-    var cardsSelected: Cards { cards.filter(\.isSelected) }
-    var cardsMatched: Cards { cards.filter(\.isMatched) }
-    var cardsVisible: Cards { cards.filter(\.isVisible) }
+    private var selection: Cards { cards.filter(\.isSelected) }
 
     private(set) var cards: Cards
 
@@ -95,22 +92,18 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     mutating func select(_ selectedCard: Card) {
-        switch cardsSelected.count {
-        case 1 ... 2 where cardsSelected.contains(selectedCard):
+        switch selection.count {
+        case 1 ... 2 where selection.contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: [selectedCard])
         case 0 ... 1:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
         case 2:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            setValue(
-                isMatch(cardsSelected),
-                forKey: \.isMatched,
-                of: cardsSelected + [selectedCard]
-            )
-        case 3 where isMatch(cardsSelected) && cardsSelected.contains(selectedCard):
-            setValue(false, forKey: \.isSelected, of: cardsSelected)
+            setValue(isMatch(selection), forKey: \.isMatched, of: selection + [selectedCard])
+        case 3 where isMatch(selection) && selection.contains(selectedCard):
+            setValue(false, forKey: \.isSelected, of: selection)
         case 3:
-            setValue(false, forKey: \.isSelected, of: cardsSelected)
+            setValue(false, forKey: \.isSelected, of: selection)
             setValue(true, forKey: \.isSelected, of: [selectedCard])
         default:
             fatalError("invalid number of selected cards")

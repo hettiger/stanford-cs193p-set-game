@@ -100,55 +100,6 @@ class SETTests: XCTestCase {
         XCTAssert(sut.cards.filter(\.isVisible).count == 0)
     }
 
-    // MARK: - Cards Dealt
-
-    func test_cardsDealt_count__returns_0() {
-        XCTAssert(sut.cardsDealt.count == 0)
-    }
-
-    func test_cardsDealt__with_12_cards_dealt__returns_12_cards() {
-        sut.deal()
-
-        XCTAssert(sut.cardsDealt == Array(sut.cards.prefix(12)))
-    }
-
-    // MARK: - Cards Selected
-
-    func test_cardsSelected_count__returns_0() {
-        XCTAssert(sut.cardsSelected.count == 0)
-    }
-
-    func test_cardsSelected__with_two_cards_selected__returns_two_cards() {
-        let cards = [sut.cards[0], sut.cards[1]]
-        cards.forEach { sut.select($0) }
-
-        XCTAssert(sut.cardsSelected == cards)
-    }
-
-    // MARK: - Cards Matched
-
-    func test_cardsMatched_count__returns_0() {
-        XCTAssert(sut.cardsMatched.count == 0)
-    }
-
-    func test_cardsMatched__with_three_matching_cards_selected__returns_three_cards() {
-        withThreeMatchingCardsSelected()
-
-        XCTAssert(sut.cardsMatched == Array(sut.cards.prefix(3)))
-    }
-
-    // MARK: - Cards Visible
-
-    func test_cardsVisible_count__returns_0() {
-        XCTAssert(sut.cardsVisible.count == 0)
-    }
-
-    func test_cardsVisible__with_12_cards_visible__returns_12_cards() {
-        sut.deal()
-
-        XCTAssert(sut.cardsVisible == Array(sut.cards.prefix(12)))
-    }
-
     // MARK: - Is Match Check
 
     func test_isMatch__without_cards__returns_false() {

@@ -10,6 +10,13 @@ import Foundation
 
 typealias SETFake = SET<ColorTypeFake, NumberTypeFake, ShapeTypeFake, ShadingTypeFake>
 
+extension SETFake {
+    var cardsDealt: Cards { cards.filter(\.isDealt) }
+    var cardsSelected: Cards { cards.filter(\.isSelected) }
+    var cardsMatched: Cards { cards.filter(\.isMatched) }
+    var cardsVisible: Cards { cards.filter(\.isVisible) }
+}
+
 enum ColorTypeFake: Hashable, CaseIterable {
     case red, green, purple
 }
