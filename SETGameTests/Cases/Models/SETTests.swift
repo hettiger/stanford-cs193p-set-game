@@ -235,6 +235,48 @@ class SETTests: XCTestCase {
 
         XCTAssert(sut.cards.filter(\.isMatched).count == 3)
     }
+    
+    func test_when_3_non_matching_cards_are_selected_and_another_card_is_selected_the_other_card_becomses_selected_while_the_3_non_matching_cards_become_deselected() {
+        let anotherCard = SETFake.Card(color: .purple, number: .three, shape: .squiggle, shading: .striped)
+        randomSourceFake.shuffle = { _ in
+            [
+                SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
+                SETFake.Card(color: .green, number: .two, shape: .oval, shading: .solid),
+                SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+                anotherCard,
+            ]
+        }
+        sut = SETFake(randomSource: randomSourceFake)
+        sut.select(sut.cards[0])
+        sut.select(sut.cards[1])
+        sut.select(sut.cards[2])
+        
+        sut.select(anotherCard)
+        
+        XCTAssert(sut.cards.prefix(3).filter(\.isSelected).count == 0)
+        XCTAssert(sut.cards.last!.isSelected == true)
+        XCTAssert(sut.selection == .one(anotherCard))
+    }
+    
+    func test_when_3_non_matching_cards_are_selected_and_one_of_them_is_selected_again_the_card_becomses_the_only_selected_card() {
+        randomSourceFake.shuffle = { _ in
+            [
+                SETFake.Card(color: .green, number: .one, shape: .diamond, shading: .open),
+                SETFake.Card(color: .green, number: .two, shape: .oval, shading: .solid),
+                SETFake.Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+            ]
+        }
+        sut = SETFake(randomSource: randomSourceFake)
+        sut.select(sut.cards[0])
+        sut.select(sut.cards[1])
+        sut.select(sut.cards[2])
+        
+        sut.select(sut.cards[0])
+        
+        XCTAssert(sut.cards.suffix(2).filter(\.isSelected).count == 0)
+        XCTAssert(sut.cards.first!.isSelected == true)
+        XCTAssert(sut.selection == .one(sut.cards[0]))
+    }
 
     // MARK: - Selection Is Match Check
 

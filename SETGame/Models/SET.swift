@@ -121,6 +121,10 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .three(cardA, cardB, selectedCard)
             setValue(selection.isMatch, forKey: \.isMatched, of: [cardA, cardB, selectedCard])
+        case let .three(cardA, cardB, cardC) where !selection.isMatch:
+            setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
+            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            selection = .one(selectedCard)
         default:
             break
         }
