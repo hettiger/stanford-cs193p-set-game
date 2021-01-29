@@ -14,6 +14,8 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     ShapeType: Hashable, ShapeType: CaseIterable,
     ShadingType: Hashable, ShadingType: CaseIterable
 {
+    typealias Cards = [Card]
+
     enum Selection: Hashable {
         case none
         case one(Card)
@@ -35,8 +37,6 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             }
         }
     }
-
-    typealias Cards = [Card]
 
     struct Card: Identifiable, Hashable {
         static func == (lhs: Card, rhs: Card) -> Bool {
@@ -121,14 +121,14 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .three(cardA, cardB, selectedCard)
             setValue(selection.isMatch, forKey: \.isMatched, of: [cardA, cardB, selectedCard])
-        case let .three(cardA, cardB, cardC) where !selection.isMatch:
+        case let .three(cardA, cardB, cardC)
+            where selection.isMatch && [cardA, cardB, cardC].contains(selectedCard):
+            setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
+            selection = .none
+        case let .three(cardA, cardB, cardC):
             setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
             setValue(true, forKey: \.isSelected, of: [selectedCard])
             selection = .one(selectedCard)
-        case let .three(cardA, cardB, cardC):
-            setValue(true, forKey: \.isSelected, of: [selectedCard])
-            setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
-            selection = [cardA, cardB, cardC].contains(selectedCard) ? .none : .one(selectedCard)
         }
     }
 
