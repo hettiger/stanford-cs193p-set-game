@@ -16,28 +16,6 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
 {
     typealias Cards = [Card]
 
-    enum Selection: Hashable {
-        case none
-        case one(Card)
-        case two(Card, Card)
-        case three(Card, Card, Card)
-
-        /// Returns true if is selection of three cards where all of the selected cards features,
-        /// looked at one-by-one, are the same on each card, or, are different on each card.
-        var isMatch: Bool {
-            switch self {
-            case let .three(cardA, cardB, cardC):
-                let colors = Set([cardA.color, cardB.color, cardC.color])
-                let numbers = Set([cardA.number, cardB.number, cardC.number])
-                let shapes = Set([cardA.shape, cardB.shape, cardC.shape])
-                let shades = Set([cardA.shading, cardB.shading, cardC.shading])
-                return ![colors.count, numbers.count, shapes.count, shades.count].contains(2)
-            default:
-                return false
-            }
-        }
-    }
-
     struct Card: Identifiable, Hashable {
         static func == (lhs: Card, rhs: Card) -> Bool {
             lhs.id == rhs.id
@@ -54,7 +32,11 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         var isVisible: Bool { isDealt && (!isMatched || isSelected && isMatched) }
     }
 
-    private(set) var selection = Selection.none
+    var cardsDealt: Cards { cards.filter(\.isDealt) }
+    var cardsSelected: Cards { cards.filter(\.isSelected) }
+    var cardsMatched: Cards { cards.filter(\.isMatched) }
+    var cardsVisible: Cards { cards.filter(\.isVisible) }
+
     private(set) var cards: Cards
 
     init(
@@ -77,18 +59,28 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
 
     func visibleSETs(_ callback: @escaping ([(Card, Card, Card)]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
-            let visibleSETs = cards
-                .filter(\.isVisible)
+            let visibleSETs = cardsVisible
                 .combinations(ofCount: 3)
                 .compactMap { cards -> (Card, Card, Card)? in
-                    let selection = Selection.three(cards[0], cards[1], cards[2])
-                    return selection.isMatch ? (cards[0], cards[1], cards[2]) : nil
+                    isMatch(cards) ? (cards[0], cards[1], cards[2]) : nil
                 }
 
             DispatchQueue.main.async {
                 callback(visibleSETs)
             }
         }
+    }
+
+    /// Returns true if number of `cards` is matching number of cases per feature;
+    /// where all of the `cards` features, looked at one-by-one,
+    /// are the same on each card, or, are different on each card.
+    func isMatch(_ cards: Cards) -> Bool {
+        guard cards.count == 3 else { return false }
+        let colors = Set(cards.map(\.color))
+        let numbers = Set(cards.map(\.number))
+        let shapes = Set(cards.map(\.shape))
+        let shades = Set(cards.map(\.shading))
+        return ![colors.count, numbers.count, shapes.count, shades.count].contains(2)
     }
 
     mutating func deal() {
@@ -104,31 +96,29 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     mutating func select(_ selectedCard: Card) {
-        switch selection {
-        case .none:
+        switch cardsSelected.count {
+        case 0:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            selection = .one(selectedCard)
-        case let .one(card) where card == selectedCard:
+        case 1 where cardsSelected.contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: [selectedCard])
-            selection = .none
-        case let .one(card):
+        case 1:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            selection = .two(card, selectedCard)
-        case let .two(cardA, cardB) where [cardA, cardB].contains(selectedCard):
+        case 2 where cardsSelected.contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: [selectedCard])
-            selection = .one(cardB)
-        case let .two(cardA, cardB):
+        case 2:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            selection = .three(cardA, cardB, selectedCard)
-            setValue(selection.isMatch, forKey: \.isMatched, of: [cardA, cardB, selectedCard])
-        case let .three(cardA, cardB, cardC)
-            where selection.isMatch && [cardA, cardB, cardC].contains(selectedCard):
-            setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
-            selection = .none
-        case let .three(cardA, cardB, cardC):
-            setValue(false, forKey: \.isSelected, of: [cardA, cardB, cardC])
+            setValue(
+                isMatch(cardsSelected),
+                forKey: \.isMatched,
+                of: cardsSelected + [selectedCard]
+            )
+        case 3 where isMatch(cardsSelected) && cardsSelected.contains(selectedCard):
+            setValue(false, forKey: \.isSelected, of: cardsSelected)
+        case 3:
+            setValue(false, forKey: \.isSelected, of: cardsSelected)
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            selection = .one(selectedCard)
+        default:
+            fatalError("invalid number of selected cards")
         }
     }
 
