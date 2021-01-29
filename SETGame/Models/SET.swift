@@ -71,9 +71,8 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         }
     }
 
-    /// Returns true if number of `cards` is matching number of cases per feature;
-    /// where all of the `cards` features, looked at one-by-one,
-    /// are the same on each card, or, are different on each card.
+    /// Returns true if number of `cards` is 3 and all of the `cards` features,
+    /// looked at one-by-one, are the same on each card, or, are different on each card.
     func isMatch(_ cards: Cards) -> Bool {
         guard cards.count == 3 else { return false }
         let colors = Set(cards.map(\.color))
