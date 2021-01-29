@@ -37,6 +37,11 @@
                BlueprintName = "SETGameTests"
                ReferencedContainer = "container:SETGame.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SETGameTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
