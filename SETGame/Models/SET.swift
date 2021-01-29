@@ -59,7 +59,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             let sets = cards
                 .combinations(ofCount: 3)
                 .compactMap { cards -> (Card, Card, Card)? in
-                    isMatch(cards) ? (cards[0], cards[1], cards[2]) : nil
+                    isSET(cards) ? (cards[0], cards[1], cards[2]) : nil
                 }
 
             DispatchQueue.main.async {
@@ -70,7 +70,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
 
     /// Returns true if number of `cards` is 3 and all of the `cards` features,
     /// looked at one-by-one, are the same on each card, or, are different on each card.
-    func isMatch(_ cards: Cards) -> Bool {
+    func isSET(_ cards: Cards) -> Bool {
         guard cards.count == 3 else { return false }
         let colors = Set(cards.map(\.color))
         let numbers = Set(cards.map(\.number))
@@ -99,8 +99,8 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             setValue(true, forKey: \.isSelected, of: [selectedCard])
         case 2:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            setValue(isMatch(selection), forKey: \.isMatched, of: selection + [selectedCard])
-        case 3 where isMatch(selection) && selection.contains(selectedCard):
+            setValue(isSET(selection), forKey: \.isMatched, of: selection + [selectedCard])
+        case 3 where isSET(selection) && selection.contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: selection)
         case 3:
             setValue(false, forKey: \.isSelected, of: selection)

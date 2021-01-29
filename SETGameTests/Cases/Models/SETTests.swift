@@ -100,38 +100,38 @@ class SETTests: XCTestCase {
         XCTAssert(sut.cards.filter(\.isVisible).count == 0)
     }
 
-    // MARK: - Is Match Check
+    // MARK: - Is SET Check
 
-    func test_isMatch__without_cards__returns_false() {
-        XCTAssert(sut.isMatch([]) == false)
+    func test_isSET__without_cards__returns_false() {
+        XCTAssert(sut.isSET([]) == false)
     }
 
-    func test_isMatch__with_one_card__returns_false() {
-        XCTAssert(sut.isMatch([sut.cards[0]]) == false)
+    func test_isSET__with_one_card__returns_false() {
+        XCTAssert(sut.isSET([sut.cards[0]]) == false)
     }
 
-    func test_isMatch__with_two_cards__returns_false() {
-        XCTAssert(sut.isMatch([sut.cards[0], sut.cards[1]]) == false)
+    func test_isSET__with_two_cards__returns_false() {
+        XCTAssert(sut.isSET([sut.cards[0], sut.cards[1]]) == false)
     }
 
-    func test_isMatch__with_three_matching_cards__returns_true() {
+    func test_isSET__with_three_matching_cards__returns_true() {
         let cards = [
             Card(color: .green, number: .one, shape: .diamond, shading: .open),
             Card(color: .purple, number: .two, shape: .oval, shading: .solid),
             Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
         ]
 
-        XCTAssert(sut.isMatch(cards) == true)
+        XCTAssert(sut.isSET(cards) == true)
     }
 
-    func test_isMatch__with_three_non_matching_cards__returns_false() {
+    func test_isSET__with_three_non_matching_cards__returns_false() {
         let cards = [
             Card(color: .green, number: .one, shape: .diamond, shading: .open),
             Card(color: .green, number: .two, shape: .oval, shading: .solid),
             Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
         ]
 
-        XCTAssert(sut.isMatch(cards) == false)
+        XCTAssert(sut.isSET(cards) == false)
     }
 
     // MARK: - Finding SETs
