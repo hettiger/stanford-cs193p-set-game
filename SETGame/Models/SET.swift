@@ -57,16 +57,16 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         self.cards = Cards(cards.shuffled(using: randomSource))
     }
 
-    func visibleSETs(_ callback: @escaping ([(Card, Card, Card)]) -> Void) {
+    func sets(_ cards: Cards, callback: @escaping ([(Card, Card, Card)]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
-            let visibleSETs = cardsVisible
+            let sets = cards
                 .combinations(ofCount: 3)
                 .compactMap { cards -> (Card, Card, Card)? in
                     isMatch(cards) ? (cards[0], cards[1], cards[2]) : nil
                 }
 
             DispatchQueue.main.async {
-                callback(visibleSETs)
+                callback(sets)
             }
         }
     }

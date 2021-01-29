@@ -183,27 +183,26 @@ class SETTests: XCTestCase {
         XCTAssert(sut.isMatch(cards) == false)
     }
 
-    // MARK: - Visible SETs
+    // MARK: - Finding SETs
 
-    func test_visibleSETs__with_all_cards_being_visible__calls_back_with_1080_SETs_on_main_thread() {
-        randomSourceFake.shuffle = { cards in cards.map { card in
-            var card = card as! Card
+    func test_sets__with_all_cards_being_visible__calls_back_with_1080_SETs_on_main_thread() {
+        let exp = expectation(description: "sets calls callback with result")
+        let cards = sut.cards.map { card -> Card in
+            var card = card
             card.isDealt = true
             return card
-        }}
-        sut = SETFake(randomSource: randomSourceFake)
-        let exp = expectation(description: "visibleSETs calls callback with result")
+        }
 
-        var actualVisibleSETs: [(Card, Card, Card)]!
+        var actualSETs: [(Card, Card, Card)]!
         var thread: Thread!
-        sut.visibleSETs { result in
-            actualVisibleSETs = result
+        sut.sets(cards) { result in
+            actualSETs = result
             thread = Thread.current
             exp.fulfill()
         }
 
         wait(for: [exp], timeout: 5)
-        XCTAssert(actualVisibleSETs.count == 1080)
+        XCTAssert(actualSETs.count == 1080)
         XCTAssert(thread.isMainThread == true)
     }
 
