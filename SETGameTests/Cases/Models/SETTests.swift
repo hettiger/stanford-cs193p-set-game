@@ -53,12 +53,14 @@ class SETTests: XCTestCase {
     }
 
     func withThreeMatchingCardsSelected() {
-        withCards([
+        let set = [
             Card(color: .green, number: .one, shape: .diamond, shading: .open),
             Card(color: .purple, number: .two, shape: .oval, shading: .solid),
             Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
-            Card(color: .purple, number: .three, shape: .squiggle, shading: .striped),
-        ])
+        ]
+        let extraCards = Array(sut.cards[1 ... 20])
+        withCards(set + extraCards)
+        sut.deal()
         sut.select(sut.cards[0])
         sut.select(sut.cards[1])
         sut.select(sut.cards[2])
@@ -347,5 +349,22 @@ class SETTests: XCTestCase {
         sut.select(sut.cards[0])
 
         XCTAssert(sut.cardsSelected == [])
+    }
+
+    func test_select_card_twice__with_three_matching_cards_selected__deals_3_more_cards() {
+        withThreeMatchingCardsSelected()
+
+        sut.select(sut.cards[0])
+
+        XCTAssert(sut.cardsDealt.count == 12 + 3)
+    }
+
+    func test_select_another_card__with_three_matching_cards_selected__deals_3_more_cards() {
+        withThreeMatchingCardsSelected()
+        let anotherCard = sut.cards[3]
+
+        sut.select(anotherCard)
+
+        XCTAssert(sut.cardsDealt.count == 12 + 3)
     }
 }

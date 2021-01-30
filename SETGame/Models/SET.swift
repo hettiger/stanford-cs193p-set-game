@@ -109,22 +109,29 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     mutating func select(_ selectedCard: Card) {
-        switch selection.count {
-        case 1 ... 2 where selection.contains(selectedCard):
+        let oldSelection = selection
+        switch oldSelection.count {
+        case 1 ... 2 where oldSelection.contains(selectedCard):
             setValue(false, forKey: \.isSelected, of: [selectedCard])
         case 0 ... 1:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
         case 2:
             setValue(true, forKey: \.isSelected, of: [selectedCard])
-            setValue(isSET(selection), forKey: \.isMatched, of: selection + [selectedCard])
-        case 3 where isSET(selection) && selection.contains(selectedCard):
-            setValue(false, forKey: \.isSelected, of: selection)
+            setIsMatched(for: selection)
+        case 3 where isSET(oldSelection):
+            deal()
+            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            setValue(false, forKey: \.isSelected, of: oldSelection)
         case 3:
-            setValue(false, forKey: \.isSelected, of: selection)
+            setValue(false, forKey: \.isSelected, of: oldSelection)
             setValue(true, forKey: \.isSelected, of: [selectedCard])
         default:
             fatalError("invalid number of selected cards")
         }
+    }
+
+    private mutating func setIsMatched(for cards: Cards) {
+        setValue(isSET(cards), forKey: \.isMatched, of: cards)
     }
 
     private mutating func setValue<Value>(
@@ -132,8 +139,6 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         forKey keyPath: WritableKeyPath<Card, Value>,
         of cards: Cards
     ) {
-        for card in cards {
-            self.cards[self.cards.firstIndex(of: card)!][keyPath: keyPath] = value
-        }
+        cards.forEach { self.cards[self.cards.firstIndex(of: $0)!][keyPath: keyPath] = value }
     }
 }
