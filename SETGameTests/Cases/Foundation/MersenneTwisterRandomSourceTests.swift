@@ -9,7 +9,7 @@
 import XCTest
 
 class MersenneTwisterRandomSourceTests: XCTestCase {
-    func test_mersenneTwisterRandomSourceRandomInt_returnsRandomIntegersInRange() {
+    func test_randomInt__returns_random_integers_in_range() {
         let sut = MersenneTwisterRandomSource()
         let range = 2 ... 5
         var results = Set<Int>()
@@ -23,7 +23,7 @@ class MersenneTwisterRandomSourceTests: XCTestCase {
         XCTAssertGreaterThan(results.count, 1)
     }
 
-    func test_mersenneTwisterRandomSourceShuffled_returnsShuffledArray() {
+    func test_shuffled__returns_shuffled_array() {
         let sut = MersenneTwisterRandomSource(seed: 1_234_567_890)
         let expectedArray = [0, 1, 7, 6, 2, 5, 8, 3, 4, 9]
         let array = Array(0 ... 9)

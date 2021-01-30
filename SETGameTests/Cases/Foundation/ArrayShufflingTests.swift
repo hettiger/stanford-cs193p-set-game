@@ -21,7 +21,7 @@ class ArrayShufflingTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_arrayShuffle_shufflesArrayInPlace() {
+    func test_arrayShuffle__shuffles_array_in_place() {
         let expectedArray = ["b", "a"]
         randomSourceFake.shuffle = { _ in expectedArray }
         var array = ["a", "b"]
@@ -31,7 +31,7 @@ class ArrayShufflingTests: XCTestCase {
         XCTAssertEqual(expectedArray, array)
     }
 
-    func test_arrayShuffled_returnsShuffledArray() {
+    func test_arrayShuffled__returns_shuffled_array() {
         let expectedArray = ["b", "a"]
         randomSourceFake.shuffle = { _ in expectedArray }
         var array = ["a", "b"]
