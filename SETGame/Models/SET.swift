@@ -79,6 +79,11 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         return ![colors.count, numbers.count, shapes.count, shades.count].contains(2)
     }
 
+    /// Deals cards according to the rules of SET; i.e. starts with 12 cards;
+    /// continues with 3 cards until whole deck of cards is dealt;
+    /// swaps dealt cards with `selection` if it is a SET.
+    ///
+    /// Swapping of cards may help with replacing cards in the UI.
     mutating func deal() {
         // Bail out if there are no undealt cards
         guard let firstUndealtCardIndex = cards.firstIndex(where: { !$0.isDealt })
