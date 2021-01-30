@@ -176,6 +176,33 @@ class SETTests: XCTestCase {
         XCTAssert(sut.cards.prefix(expectedCount).filter(\.isDealt).count == expectedCount)
     }
 
+    func test_deal__with_dealt_cards_and_SET_selected__sets_first_3_undealt_cards_to_be_dealt_and_swaps_them_individually_with_the_SET_cards(
+    ) {
+        func cardToIndex(card: Card) -> Int { sut.cards.firstIndex(of: card)! }
+        let set = [
+            Card(color: .green, number: .one, shape: .diamond, shading: .open),
+            Card(color: .purple, number: .two, shape: .oval, shading: .solid),
+            Card(color: .red, number: .three, shape: .squiggle, shading: .striped),
+        ]
+        let expectedCardsToBeDealt = Array(sut.cards[11 ... 13])
+        var dealtCards = Array(sut.cards[1 ... 9]) // 9 cards
+        dealtCards.insert(set[0], at: 0) // + 1 card
+        dealtCards.insert(set[1], at: 4) // + 1 card
+        dealtCards.insert(set[2], at: 5) // + 1 card = 12 cards for initial deal
+        withCards(dealtCards + expectedCardsToBeDealt)
+        sut.deal()
+        set.forEach { card in sut.select(card) }
+        let expectedIndices = set.map(cardToIndex)
+        let expectedSETIndices = expectedCardsToBeDealt.map(cardToIndex)
+
+        sut.deal()
+        let actualIndices = expectedCardsToBeDealt.map(cardToIndex)
+        let actualSETIndices = set.map(cardToIndex)
+
+        XCTAssert(expectedIndices == actualIndices)
+        XCTAssert(expectedSETIndices == actualSETIndices)
+    }
+
     // MARK: - Card Is Visible
 
     func test_card_isVisible__with_selected_card__returns_false() {

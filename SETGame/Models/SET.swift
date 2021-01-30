@@ -80,15 +80,27 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     mutating func deal() {
+        // Bail out if there are no undealt cards
         guard let firstUndealtCardIndex = cards.firstIndex(where: { !$0.isDealt })
         else { return }
 
+        // Deal 12 cards if there are no dealt cards yet; then bail out.
         guard firstUndealtCardIndex != cards.startIndex
         else { setValue(true, forKey: \.isDealt, of: Array(cards.prefix(12))); return }
 
-        let lastCardToBeDealtIndex = firstUndealtCardIndex.advanced(by: 2)
-        let cardsToBeDealt = Array(cards[firstUndealtCardIndex ... lastCardToBeDealtIndex])
+        // Deal 3 cards
+        let cardsToBeDealt = Array(cards[firstUndealtCardIndex...].prefix(3))
         setValue(true, forKey: \.isDealt, of: cardsToBeDealt)
+
+        // Swap dealt cards with `selection` if it is a SET
+        guard isSET(selection) else { return }
+        for (setCard, dealtCard)
+            in [Card: Card](uniqueKeysWithValues: zip(selection, cardsToBeDealt))
+        {
+            let setIndex = cards.firstIndex(of: setCard)!
+            let dealtIndex = cards.firstIndex(of: dealtCard)!
+            cards.swapAt(setIndex, dealtIndex)
+        }
     }
 
     mutating func select(_ selectedCard: Card) {
