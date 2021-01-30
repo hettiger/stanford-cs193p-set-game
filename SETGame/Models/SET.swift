@@ -54,6 +54,12 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         self.cards = Cards(cards.shuffled(using: randomSource))
     }
 
+    func firstSET(_ cards: Cards) -> (Card, Card, Card)? {
+        guard let set = cards.combinations(ofCount: 3).first(where: { isSET($0) })
+        else { return nil }
+        return (set[0], set[1], set[2])
+    }
+
     func sets(_ cards: Cards, callback: @escaping ([(Card, Card, Card)]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let sets = cards
