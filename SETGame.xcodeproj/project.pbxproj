@@ -28,6 +28,7 @@
 		5B4F534725C095070036EEBF /* RandomSourceFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F534625C095070036EEBF /* RandomSourceFake.swift */; };
 		5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */; };
 		5B7FFA2325C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */; };
+		5BD6A6DC25C61AEF00B2D7D0 /* Shape+ClassicShading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6DB25C61AEF00B2D7D0 /* Shape+ClassicShading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		5B4F534625C095070036EEBF /* RandomSourceFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomSourceFake.swift; sourceTree = "<group>"; };
 		5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Subscript.swift"; sourceTree = "<group>"; };
 		5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeSubscriptTests.swift; sourceTree = "<group>"; };
+		5BD6A6DB25C61AEF00B2D7D0 /* Shape+ClassicShading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+ClassicShading.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				5B3F09BB25C5BA8300A00FFF /* Diamond.swift */,
 				5B3F09C025C5BA9900A00FFF /* Squiggle.swift */,
+				5BD6A6DB25C61AEF00B2D7D0 /* Shape+ClassicShading.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				5B3F09BC25C5BA8300A00FFF /* Diamond.swift in Sources */,
 				5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */,
 				5B3F09B425C5BA4D00A00FFF /* ClassicCardView.swift in Sources */,
+				5BD6A6DC25C61AEF00B2D7D0 /* Shape+ClassicShading.swift in Sources */,
 				5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
