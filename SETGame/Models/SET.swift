@@ -39,7 +39,25 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     init(
         randomSource: RandomSource = MersenneTwisterRandomSource.shared
     ) {
-        var cards = [Card]()
+        Self.guardAgainstInvalidFeatureEnumerations()
+        cards = Cards(Self.makeCards().shuffled(using: randomSource))
+    }
+
+    private static func guardAgainstInvalidFeatureEnumerations() {
+        if [
+            ColorType.allCases.count,
+            NumberType.allCases.count,
+            ShapeType.allCases.count,
+            ShadingType.allCases.count,
+        ].contains(where: { $0 != 3 }) {
+            fatalError(
+                "initializing SET with feature enumeration not having 3 cases is not supported"
+            )
+        }
+    }
+
+    private static func makeCards() -> Cards {
+        var cards = Cards()
         for color in ColorType.allCases {
             for number in NumberType.allCases {
                 for shape in ShapeType.allCases {
@@ -51,15 +69,17 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
                 }
             }
         }
-        self.cards = Cards(cards.shuffled(using: randomSource))
+        return cards
     }
 
+    /// Returns first possible SET found in `cards`
     func firstSET(_ cards: Cards) -> (Card, Card, Card)? {
         guard let set = cards.combinations(ofCount: 3).first(where: { isSET($0) })
         else { return nil }
         return (set[0], set[1], set[2])
     }
 
+    /// Calls `callback` with all possible SETs found in `cards`
     func sets(_ cards: Cards, callback: @escaping ([(Card, Card, Card)]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let sets = cards
@@ -85,7 +105,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         return ![colors.count, numbers.count, shapes.count, shades.count].contains(2)
     }
 
-    /// Deals cards according to the rules of SET; i.e. starts with 12 cards;
+    /// Deals cards per the rules of SET; i.e. starts with 12 cards;
     /// continues with 3 cards until whole deck of cards is dealt;
     /// swaps dealt cards with `selection` if it is a SET.
     ///
@@ -114,23 +134,25 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         }
     }
 
-    mutating func select(_ selectedCard: Card) {
+    /// Handles selection of `card` per the rules of SET;
+    /// i.e. manages state of `oldSelection` and `card`.
+    mutating func select(_ card: Card) {
         let oldSelection = selection
         switch oldSelection.count {
-        case 1 ... 2 where oldSelection.contains(selectedCard):
-            setValue(false, forKey: \.isSelected, of: [selectedCard])
+        case 1 ... 2 where oldSelection.contains(card):
+            setValue(false, forKey: \.isSelected, of: [card])
         case 0 ... 1:
-            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [card])
         case 2:
-            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [card])
             setIsMatched(for: selection)
         case 3 where isSET(oldSelection):
             deal()
-            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [card])
             setValue(false, forKey: \.isSelected, of: oldSelection)
         case 3:
             setValue(false, forKey: \.isSelected, of: oldSelection)
-            setValue(true, forKey: \.isSelected, of: [selectedCard])
+            setValue(true, forKey: \.isSelected, of: [card])
         default:
             fatalError("invalid number of selected cards")
         }
