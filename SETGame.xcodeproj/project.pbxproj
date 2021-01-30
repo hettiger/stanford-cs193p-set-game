@@ -11,6 +11,10 @@
 		5B3F09A025C35FAA00A00FFF /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 5B3F099F25C35FAA00A00FFF /* Algorithms */; };
 		5B3F09A625C5B99F00A00FFF /* MersenneTwisterRandomSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09A525C5B99F00A00FFF /* MersenneTwisterRandomSourceTests.swift */; };
 		5B3F09AE25C5B9DE00A00FFF /* ArrayShufflingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09AD25C5B9DE00A00FFF /* ArrayShufflingTests.swift */; };
+		5B3F09B425C5BA4D00A00FFF /* ClassicCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09B325C5BA4D00A00FFF /* ClassicCardView.swift */; };
+		5B3F09BC25C5BA8300A00FFF /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09BB25C5BA8300A00FFF /* Diamond.swift */; };
+		5B3F09C125C5BA9900A00FFF /* Squiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09C025C5BA9900A00FFF /* Squiggle.swift */; };
+		5B3F09CF25C5BFE000A00FFF /* ClassicSET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09CE25C5BFE000A00FFF /* ClassicSET.swift */; };
 		5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CB25C07F250036EEBF /* SETGame.swift */; };
 		5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CD25C07F250036EEBF /* ContentView.swift */; };
 		5B4F52D025C07F270036EEBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F52CF25C07F270036EEBF /* Assets.xcassets */; };
@@ -22,6 +26,8 @@
 		5B4F533D25C0940B0036EEBF /* Array+Shuffling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F533B25C0940B0036EEBF /* Array+Shuffling.swift */; };
 		5B4F533E25C0940B0036EEBF /* MersenneTwisterRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F533C25C0940B0036EEBF /* MersenneTwisterRandomSource.swift */; };
 		5B4F534725C095070036EEBF /* RandomSourceFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F534625C095070036EEBF /* RandomSourceFake.swift */; };
+		5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */; };
+		5B7FFA2325C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,10 @@
 		5B3F098B25C35A4200A00FFF /* SETFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SETFake.swift; sourceTree = "<group>"; };
 		5B3F09A525C5B99F00A00FFF /* MersenneTwisterRandomSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MersenneTwisterRandomSourceTests.swift; sourceTree = "<group>"; };
 		5B3F09AD25C5B9DE00A00FFF /* ArrayShufflingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayShufflingTests.swift; sourceTree = "<group>"; };
+		5B3F09B325C5BA4D00A00FFF /* ClassicCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicCardView.swift; sourceTree = "<group>"; };
+		5B3F09BB25C5BA8300A00FFF /* Diamond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
+		5B3F09C025C5BA9900A00FFF /* Squiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squiggle.swift; sourceTree = "<group>"; };
+		5B3F09CE25C5BFE000A00FFF /* ClassicSET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicSET.swift; sourceTree = "<group>"; };
 		5B4F52C825C07F250036EEBF /* SETGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SETGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4F52CB25C07F250036EEBF /* SETGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SETGame.swift; sourceTree = "<group>"; };
 		5B4F52CD25C07F250036EEBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +72,8 @@
 		5B4F533B25C0940B0036EEBF /* Array+Shuffling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Shuffling.swift"; sourceTree = "<group>"; };
 		5B4F533C25C0940B0036EEBF /* MersenneTwisterRandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MersenneTwisterRandomSource.swift; sourceTree = "<group>"; };
 		5B4F534625C095070036EEBF /* RandomSourceFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomSourceFake.swift; sourceTree = "<group>"; };
+		5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Subscript.swift"; sourceTree = "<group>"; };
+		5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeSubscriptTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +114,26 @@
 			children = (
 				5B3F09A525C5B99F00A00FFF /* MersenneTwisterRandomSourceTests.swift */,
 				5B3F09AD25C5B9DE00A00FFF /* ArrayShufflingTests.swift */,
+				5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		5B3F09B225C5BA4000A00FFF /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				5B3F09BB25C5BA8300A00FFF /* Diamond.swift */,
+				5B3F09C025C5BA9900A00FFF /* Squiggle.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		5B3F09CD25C5BF9C00A00FFF /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B3F09CE25C5BFE000A00FFF /* ClassicSET.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		5B4F52BF25C07F250036EEBF = {
@@ -189,6 +219,8 @@
 		5B4F530125C07FAD0036EEBF /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				5B3F09CD25C5BF9C00A00FFF /* View Models */,
+				5B3F09B225C5BA4000A00FFF /* Shapes */,
 				5B4F530225C07FB20036EEBF /* Views */,
 			);
 			path = "User Interface";
@@ -198,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				5B4F52CD25C07F250036EEBF /* ContentView.swift */,
+				5B3F09B325C5BA4D00A00FFF /* ClassicCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +248,7 @@
 			children = (
 				5B4F533B25C0940B0036EEBF /* Array+Shuffling.swift */,
 				5B4F533C25C0940B0036EEBF /* MersenneTwisterRandomSource.swift */,
+				5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -374,9 +408,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B4F533E25C0940B0036EEBF /* MersenneTwisterRandomSource.swift in Sources */,
+				5B3F09CF25C5BFE000A00FFF /* ClassicSET.swift in Sources */,
 				5B4F531525C0813C0036EEBF /* SET.swift in Sources */,
+				5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */,
+				5B3F09C125C5BA9900A00FFF /* Squiggle.swift in Sources */,
 				5B4F533D25C0940B0036EEBF /* Array+Shuffling.swift in Sources */,
+				5B3F09BC25C5BA8300A00FFF /* Diamond.swift in Sources */,
 				5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */,
+				5B3F09B425C5BA4D00A00FFF /* ClassicCardView.swift in Sources */,
 				5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +428,7 @@
 				5B4F532325C083870036EEBF /* SETTests.swift in Sources */,
 				5B4F52DE25C07F270036EEBF /* SETGameTests.swift in Sources */,
 				5B4F534725C095070036EEBF /* RandomSourceFake.swift in Sources */,
+				5B7FFA2325C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift in Sources */,
 				5B3F09AE25C5B9DE00A00FFF /* ArrayShufflingTests.swift in Sources */,
 				5B3F098C25C35A4200A00FFF /* SETFake.swift in Sources */,
 			);
