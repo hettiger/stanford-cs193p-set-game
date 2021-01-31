@@ -58,14 +58,6 @@ class ClassicSET: ObservableObject {
         }
     }
 
-    // MARK: - Lifecycle
-
-    init() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            self.game.deal()
-        }
-    }
-
     // MARK: - Model Accessors
 
     var cards: Cards { game.cards }
@@ -94,6 +86,7 @@ class ClassicSET: ObservableObject {
 
     func startNewGame() {
         game = Game()
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             self.game.deal()
         }

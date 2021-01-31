@@ -19,38 +19,40 @@ struct RootView: View {
             ZStack {
                 Rectangle().foregroundColor(backgroundColor)
                 ClassicGameView()
-                    .navigationBarItems(
-                        leading: Text("Score: \(game.numberOfFoundSETs)"),
-                        trailing: Button("New Game") {
-                            withAnimation(.easeInOut) {
-                                game.startNewGame()
-                            }
-                        }
-                        .foregroundColor(.accentColor)
-                    )
-                    .navigationBarTitle("SET", displayMode: .inline)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            Button("Hint (\(game.numberOfVisibleSETs))") {
-                                isPresentedMissingImplementationAlert = true
-                            }
-                            Spacer()
-                            Button("Deal Cards") {
-                                withAnimation(.easeInOut) {
-                                    game.deal()
-                                }
-                            }
+            }
+            .navigationBarTitle("SET", displayMode: .inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Text("Score: \(game.numberOfFoundSETs)")
+                        .foregroundColor(.secondary)
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button("New Game") {
+                        withAnimation {
+                            game.startNewGame()
                         }
                     }
-                    .foregroundColor(.secondary)
-                    .alert(isPresented: $isPresentedMissingImplementationAlert, content: {
-                        Alert(
-                            title: Text("Missing Implementation"),
-                            message: Text("Still working on this; please be patient."),
-                            dismissButton: .default(Text("OK"))
-                        )
-                    })
+                    .foregroundColor(.accentColor)
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("Hint (\(game.numberOfVisibleSETs))") {
+                        isPresentedMissingImplementationAlert = true
+                    }
+                    Spacer()
+                    Button("Deal Cards") {
+                        withAnimation {
+                            game.deal()
+                        }
+                    }
+                }
             }
+            .alert(isPresented: $isPresentedMissingImplementationAlert, content: {
+                Alert(
+                    title: Text("Missing Implementation"),
+                    message: Text("Still working on this; please be patient."),
+                    dismissButton: .default(Text("OK"))
+                )
+            })
         }
     }
 

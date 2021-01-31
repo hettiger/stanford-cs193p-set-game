@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ClassicGameView: View {
-    @ObservedObject var game = ClassicSET.shared
+    @ObservedObject
+    var game = ClassicSET.shared
 
     @State
     var numberOfDealtCards = 0
@@ -26,19 +27,14 @@ struct ClassicGameView: View {
                     .foregroundColor(.clear)
             }
             .padding()
-            .transition(AnyTransition.asymmetric(
-                insertion: AnyTransition
-                    .move(edge: .bottom)
-                    .combined(with: .scale(scale: 0, anchor: .bottom))
-                    .animation(
-                        Animation.easeInOut.delay(animationDelay(for: index))
-                    ),
-                removal: AnyTransition
-                    .move(edge: .top)
-                    .combined(with: .scale(scale: 0, anchor: .top))
-            ))
+            .transition(transition(for: index))
             .onAppear { numberOfDealtCards += 1 }
             .onDisappear { numberOfDealtCards -= 1 }
+        }
+        .onAppear {
+            withAnimation {
+                game.deal()
+            }
         }
     }
 
@@ -56,8 +52,19 @@ struct ClassicGameView: View {
         }
     }
 
-    func animationDelay(for index: Int) -> Double {
-        Double(index - numberOfDealtCards) * 0.3
+    func transition(for index: Int) -> AnyTransition {
+        let delay = Double(index - numberOfDealtCards) * 0.3
+        return AnyTransition.asymmetric(
+            insertion: AnyTransition
+                .move(edge: .bottom)
+                .combined(with: .scale(scale: 0, anchor: .bottom))
+                .animation(
+                    Animation.easeInOut.delay(delay)
+                ),
+            removal: AnyTransition
+                .move(edge: .top)
+                .combined(with: .scale(scale: 0, anchor: .top))
+        )
     }
 }
 
