@@ -29,6 +29,9 @@
 		5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */; };
 		5B7FFA2325C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */; };
 		5BD6A6DC25C61AEF00B2D7D0 /* Shape+ClassicShading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6DB25C61AEF00B2D7D0 /* Shape+ClassicShading.swift */; };
+		5BD6A6E125C6AA0B00B2D7D0 /* ClassicGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */; };
+		5BD6A6E625C6AB9F00B2D7D0 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */; };
+		5BD6A6EB25C6AC0500B2D7D0 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Subscript.swift"; sourceTree = "<group>"; };
 		5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeSubscriptTests.swift; sourceTree = "<group>"; };
 		5BD6A6DB25C61AEF00B2D7D0 /* Shape+ClassicShading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+ClassicShading.swift"; sourceTree = "<group>"; };
+		5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGameView.swift; sourceTree = "<group>"; };
+		5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				5B3F09BB25C5BA8300A00FFF /* Diamond.swift */,
-				5B3F09C025C5BA9900A00FFF /* Squiggle.swift */,
 				5BD6A6DB25C61AEF00B2D7D0 /* Shape+ClassicShading.swift */,
+				5B3F09C025C5BA9900A00FFF /* Squiggle.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -232,8 +238,10 @@
 		5B4F530225C07FB20036EEBF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5B4F52CD25C07F250036EEBF /* ContentView.swift */,
 				5B3F09B325C5BA4D00A00FFF /* ClassicCardView.swift */,
+				5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */,
+				5B4F52CD25C07F250036EEBF /* ContentView.swift */,
+				5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -250,8 +258,9 @@
 			isa = PBXGroup;
 			children = (
 				5B4F533B25C0940B0036EEBF /* Array+Shuffling.swift */,
-				5B4F533C25C0940B0036EEBF /* MersenneTwisterRandomSource.swift */,
 				5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */,
+				5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */,
+				5B4F533C25C0940B0036EEBF /* MersenneTwisterRandomSource.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -413,7 +422,9 @@
 				5B4F533E25C0940B0036EEBF /* MersenneTwisterRandomSource.swift in Sources */,
 				5B3F09CF25C5BFE000A00FFF /* ClassicSET.swift in Sources */,
 				5B4F531525C0813C0036EEBF /* SET.swift in Sources */,
+				5BD6A6E625C6AB9F00B2D7D0 /* GridView.swift in Sources */,
 				5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */,
+				5BD6A6EB25C6AC0500B2D7D0 /* GridLayout.swift in Sources */,
 				5B3F09C125C5BA9900A00FFF /* Squiggle.swift in Sources */,
 				5B4F533D25C0940B0036EEBF /* Array+Shuffling.swift in Sources */,
 				5B3F09BC25C5BA8300A00FFF /* Diamond.swift in Sources */,
@@ -421,6 +432,7 @@
 				5B3F09B425C5BA4D00A00FFF /* ClassicCardView.swift in Sources */,
 				5BD6A6DC25C61AEF00B2D7D0 /* Shape+ClassicShading.swift in Sources */,
 				5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */,
+				5BD6A6E125C6AA0B00B2D7D0 /* ClassicGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
