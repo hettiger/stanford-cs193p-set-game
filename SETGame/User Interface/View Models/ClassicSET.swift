@@ -51,17 +51,19 @@ class ClassicSET: ObservableObject {
 
     @Published
     private var game = Game()
-    
+
     // MARK: - Lifecycle
-    
+
     init() {
-        game.deal()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.game.deal()
+        }
     }
 
     // MARK: - Model Accessors
 
     var cards: Cards { game.cards }
-    
+
     var hint: Cards {
         guard let firstSET = game.firstSET(cards.filter(\.isVisible)) else { return [] }
         return [firstSET.0, firstSET.1, firstSET.2]
@@ -73,8 +75,14 @@ class ClassicSET: ObservableObject {
         game.select(card)
     }
 
+    func deal() {
+        game.deal()
+    }
+
     func startNewGame() {
         game = Game()
-        game.deal()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.game.deal()
+        }
     }
 }

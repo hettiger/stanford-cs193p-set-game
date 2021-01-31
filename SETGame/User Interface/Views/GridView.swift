@@ -10,12 +10,12 @@ import SwiftUI
 struct Grid<Item: Identifiable, ItemView: View>: View where Item: Hashable {
     var items: [Item]
     var desiredAspectRatio: Double
-    var viewForItem: (Item) -> ItemView
+    var viewForItem: (Item, Int) -> ItemView
 
     init(
         _ items: [Item],
         desiredAspectRatio: CGFloat = 1,
-        viewForItem: @escaping (Item) -> ItemView
+        viewForItem: @escaping (Item, Int) -> ItemView
     ) {
         self.items = items
         self.desiredAspectRatio = Double(desiredAspectRatio)
@@ -31,8 +31,9 @@ struct Grid<Item: Identifiable, ItemView: View>: View where Item: Hashable {
             )
             let (width, height) = (layout.itemSize.width, layout.itemSize.height)
             ForEach(items) { item in
-                let position = layout.location(ofItemAt: items.firstIndex(of: item)!)
-                viewForItem(item).frame(width: width, height: height).position(position)
+                let index = items.firstIndex(of: item)!
+                let position = layout.location(ofItemAt: index)
+                viewForItem(item, index).frame(width: width, height: height).position(position)
             }
         }
     }
@@ -40,7 +41,9 @@ struct Grid<Item: Identifiable, ItemView: View>: View where Item: Hashable {
 
 struct Grid_Previews: PreviewProvider {
     static var previews: some View {
-        Grid(ClassicSET.shared.cards.filter(\.isVisible)) { card in
+        let game = ClassicSET.shared
+        game.deal()
+        return Grid(game.cards.filter(\.isVisible)) { card, _ in
             ClassicCardView(card: card).padding()
         }
     }
