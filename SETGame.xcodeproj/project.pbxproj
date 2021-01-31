@@ -16,7 +16,6 @@
 		5B3F09C125C5BA9900A00FFF /* Squiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09C025C5BA9900A00FFF /* Squiggle.swift */; };
 		5B3F09CF25C5BFE000A00FFF /* ClassicSET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F09CE25C5BFE000A00FFF /* ClassicSET.swift */; };
 		5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CB25C07F250036EEBF /* SETGame.swift */; };
-		5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52CD25C07F250036EEBF /* ContentView.swift */; };
 		5B4F52D025C07F270036EEBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F52CF25C07F270036EEBF /* Assets.xcassets */; };
 		5B4F52D325C07F270036EEBF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F52D225C07F270036EEBF /* Preview Assets.xcassets */; };
 		5B4F52DE25C07F270036EEBF /* SETGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F52DD25C07F270036EEBF /* SETGameTests.swift */; };
@@ -32,6 +31,7 @@
 		5BD6A6E125C6AA0B00B2D7D0 /* ClassicGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */; };
 		5BD6A6E625C6AB9F00B2D7D0 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */; };
 		5BD6A6EB25C6AC0500B2D7D0 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */; };
+		5BD6A6F625C6B68700B2D7D0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6F525C6B68700B2D7D0 /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,6 @@
 		5B3F09CE25C5BFE000A00FFF /* ClassicSET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicSET.swift; sourceTree = "<group>"; };
 		5B4F52C825C07F250036EEBF /* SETGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SETGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4F52CB25C07F250036EEBF /* SETGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SETGame.swift; sourceTree = "<group>"; };
-		5B4F52CD25C07F250036EEBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5B4F52CF25C07F270036EEBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B4F52D225C07F270036EEBF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5B4F52D425C07F270036EEBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,6 +81,7 @@
 		5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGameView.swift; sourceTree = "<group>"; };
 		5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		5BD6A6F525C6B68700B2D7D0 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,8 +240,8 @@
 			children = (
 				5B3F09B325C5BA4D00A00FFF /* ClassicCardView.swift */,
 				5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */,
-				5B4F52CD25C07F250036EEBF /* ContentView.swift */,
 				5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */,
+				5BD6A6F525C6B68700B2D7D0 /* RootView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,12 +423,12 @@
 				5B3F09CF25C5BFE000A00FFF /* ClassicSET.swift in Sources */,
 				5B4F531525C0813C0036EEBF /* SET.swift in Sources */,
 				5BD6A6E625C6AB9F00B2D7D0 /* GridView.swift in Sources */,
+				5BD6A6F625C6B68700B2D7D0 /* RootView.swift in Sources */,
 				5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */,
 				5BD6A6EB25C6AC0500B2D7D0 /* GridLayout.swift in Sources */,
 				5B3F09C125C5BA9900A00FFF /* Squiggle.swift in Sources */,
 				5B4F533D25C0940B0036EEBF /* Array+Shuffling.swift in Sources */,
 				5B3F09BC25C5BA8300A00FFF /* Diamond.swift in Sources */,
-				5B4F52CE25C07F250036EEBF /* ContentView.swift in Sources */,
 				5B3F09B425C5BA4D00A00FFF /* ClassicCardView.swift in Sources */,
 				5BD6A6DC25C61AEF00B2D7D0 /* Shape+ClassicShading.swift in Sources */,
 				5B4F52CC25C07F250036EEBF /* SETGame.swift in Sources */,
