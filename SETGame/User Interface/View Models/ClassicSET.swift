@@ -70,6 +70,10 @@ class ClassicSET: ObservableObject {
 
     var cards: Cards { game.cards }
 
+    var numberOfFoundSETs: Int {
+        cards.filter(\.isMatched).count / 3
+    }
+
     var hint: Cards {
         guard let firstSET = game.firstSET(cards.filter(\.isVisible)) else { return [] }
         return [firstSET.0, firstSET.1, firstSET.2]

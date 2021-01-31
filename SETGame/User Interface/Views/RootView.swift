@@ -20,7 +20,7 @@ struct RootView: View {
                 Rectangle().foregroundColor(backgroundColor)
                 ClassicGameView()
                     .navigationBarItems(
-                        leading: Text("Score"),
+                        leading: Text("Score: \(game.numberOfFoundSETs)"),
                         trailing: Button("New Game") {
                             withAnimation(.easeInOut) {
                                 game.startNewGame()
