@@ -31,7 +31,7 @@ struct RootView: View {
                     .navigationBarTitle("SET", displayMode: .inline)
                     .toolbar {
                         ToolbarItemGroup(placement: .bottomBar) {
-                            Button("Hint (Total SETs visible)") {
+                            Button("Hint (\(game.numberOfVisibleSETs))") {
                                 isPresentedMissingImplementationAlert = true
                             }
                             Spacer()

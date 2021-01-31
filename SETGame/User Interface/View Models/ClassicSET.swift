@@ -50,7 +50,13 @@ class ClassicSET: ObservableObject {
     // MARK: - Model
 
     @Published
-    private var game = Game()
+    private var game = Game() {
+        didSet {
+            game.sets(game.cards.filter(\.isVisible)) { sets in
+                self.numberOfVisibleSETs = sets.count
+            }
+        }
+    }
 
     // MARK: - Lifecycle
 
@@ -68,6 +74,9 @@ class ClassicSET: ObservableObject {
         guard let firstSET = game.firstSET(cards.filter(\.isVisible)) else { return [] }
         return [firstSET.0, firstSET.1, firstSET.2]
     }
+
+    @Published
+    private(set) var numberOfVisibleSETs = 0
 
     // MARK: - Intents
 
