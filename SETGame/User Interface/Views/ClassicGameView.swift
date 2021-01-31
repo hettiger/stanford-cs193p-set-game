@@ -21,7 +21,7 @@ struct ClassicGameView: View {
                     // TODO: Stop showing hint per default
                     .opacity(game.hint.contains(card) ? 1 : 0.5)
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(card.isSelected ? isSelectedColor : Color.clear)
+                    .strokeBorder(strokeColor(for: card))
                     .aspectRatio(cardAspectRatio, contentMode: .fit)
                     .foregroundColor(.clear)
             }
@@ -46,7 +46,15 @@ struct ClassicGameView: View {
 
     let cardAspectRatio: CGFloat = 5 / 8
     let cornerRadius: CGFloat = 25.0
-    let isSelectedColor = Color.accentColor
+
+    func strokeColor(for card: ClassicSET.Card) -> Color {
+        switch (card.isSelected, card.isMatched, game.cards.filter(\.isSelected).count) {
+        case (true, false, ...2): return .accentColor
+        case (true, false, 3...): return .red
+        case (true, true, 3...): return .green
+        default: return .clear
+        }
+    }
 
     func animationDelay(for index: Int) -> Double {
         Double(index - numberOfDealtCards) * 0.3
