@@ -31,12 +31,11 @@ class ClassicSET: ObservableObject {
     enum ShapeType: Hashable, CaseIterable {
         case diamond, squiggle, capsule
 
-        @ViewBuilder
-        func body(shading: ShadingType) -> some View {
+        var value: AnyShape {
             switch self {
-            case .diamond: Diamond().shading(shading)
-            case .squiggle: Squiggle().shading(shading)
-            case .capsule: Capsule().shading(shading)
+            case .diamond: return AnyShape(Diamond())
+            case .squiggle: return AnyShape(Squiggle())
+            case .capsule: return AnyShape(Capsule())
             }
         }
     }

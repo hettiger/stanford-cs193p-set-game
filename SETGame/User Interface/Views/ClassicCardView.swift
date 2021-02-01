@@ -23,7 +23,7 @@ struct ClassicCardView: View {
                     .shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
                 VStack(spacing: vStackSpacing(for: geometry.size)) {
                     ForEach(0 ..< card.number.rawValue) { _ in
-                        card.shape.body(shading: card.shading)
+                        ClassicShapeView(shape: card.shape, shading: card.shading)
                             .foregroundColor(card.color.value)
                             .aspectRatio(shapeAspect.ratio, contentMode: .fit)
                     }
