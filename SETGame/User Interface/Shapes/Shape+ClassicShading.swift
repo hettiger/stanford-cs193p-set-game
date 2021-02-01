@@ -14,30 +14,41 @@ extension Shape {
         case .solid:
             fill()
         case .open:
-            stroke(lineWidth: strokeWidth).padding(padding)
+            GeometryReader { geometry in
+                stroke(lineWidth: strokeWidth(for: geometry.size))
+                    .padding(padding(for: geometry.size))
+            }
         case .striped:
             GeometryReader { geometry in
                 ZStack {
-                    HStack(spacing: spacing) {
+                    HStack(spacing: spacing(for: geometry.size)) {
                         ForEach(0 ..< stripes(for: geometry.size), id: \.self) { _ in
                             Rectangle()
                         }
                     }
                     .clipShape(self)
-                    self.stroke(lineWidth: strokeWidth)
+                    self.stroke(lineWidth: strokeWidth(for: geometry.size))
                 }
-                .padding(padding)
+                .padding(padding(for: geometry.size))
             }
         }
     }
 
     // MARK: - Drawing Constants
 
-    private var spacing: CGFloat { strokeWidth }
-    private var padding: CGFloat { strokeWidth / 2 }
-    private var strokeWidth: CGFloat { 4 }
+    private func spacing(for size: CGSize) -> CGFloat {
+        strokeWidth(for: size)
+    }
+
+    private func padding(for size: CGSize) -> CGFloat {
+        strokeWidth(for: size) / 2
+    }
+
+    private func strokeWidth(for size: CGSize) -> CGFloat {
+        size.width / 100 * 4
+    }
 
     private func stripes(for size: CGSize) -> Int {
-        Int(size.width / 1.5 / strokeWidth)
+        Int(size.width / 1.5 / strokeWidth(for: size))
     }
 }
