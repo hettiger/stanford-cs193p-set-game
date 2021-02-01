@@ -15,21 +15,17 @@ struct ClassicGameView: View {
     var numberOfDealtCards = 0
 
     var body: some View {
-        Grid(game.cards.filter(\.isVisible), desiredAspectRatio: cardAspectRatio) { card, index in
-            ZStack {
-                ClassicCardView(card: card)
-                    .onTapGesture(count: 1) { game.select(card) }
-                    // TODO: Stop showing hint per default
-                    .opacity(game.hint.contains(card) ? 1 : 0.5)
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(strokeColor(for: card))
-                    .aspectRatio(cardAspectRatio, contentMode: .fit)
-                    .foregroundColor(.clear)
-            }
-            .padding()
-            .transition(transition(for: index))
-            .onAppear { numberOfDealtCards += 1 }
-            .onDisappear { numberOfDealtCards -= 1 }
+        let numberOfSelectedCards = game.cards.filter(\.isSelected).count
+        Grid(
+            game.cards.filter(\.isVisible),
+            desiredAspectRatio: DrawingConstants.cardAspect.ratio
+        ) { card, index in
+            ClassicCardView(card: card, numberOfSelectedCards: numberOfSelectedCards)
+                .onTapGesture(count: 1) { game.select(card) }
+                .padding()
+                .transition(transition(for: index))
+                .onAppear { numberOfDealtCards += 1 }
+                .onDisappear { numberOfDealtCards -= 1 }
         }
         .onAppear {
             withAnimation {
@@ -39,18 +35,6 @@ struct ClassicGameView: View {
     }
 
     // MARK: - Drawing Constants
-
-    let cardAspectRatio: CGFloat = 5 / 8
-    let cornerRadius: CGFloat = 25.0
-
-    func strokeColor(for card: ClassicSET.Card) -> Color {
-        switch (card.isSelected, card.isMatched, game.cards.filter(\.isSelected).count) {
-        case (true, false, ...2): return .accentColor
-        case (true, false, 3...): return .red
-        case (true, true, 3...): return .green
-        default: return .clear
-        }
-    }
 
     func transition(for index: Int) -> AnyTransition {
         let delay = Double(index - numberOfDealtCards) * 0.3
