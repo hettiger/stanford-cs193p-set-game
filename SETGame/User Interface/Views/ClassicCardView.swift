@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// - TODO: Fix random drawing issues on shapes that have been resized (e.g. when cards were dealt)
 struct ClassicCardView: View {
     @ObservedObject
     var game = ClassicSET.shared
