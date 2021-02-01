@@ -19,8 +19,7 @@ extension Shape {
             GeometryReader { geometry in
                 ZStack {
                     HStack(spacing: spacing) {
-                        // TODO: Fix ForEach<Range<Int>, Int, Rectangle> count (10) != its initial count (0). `ForEach(_:content:)` should only be used for *constant* data. Instead conform data to `Identifiable` or use `ForEach(_:id:content:)` and provide an explicit `id`!
-                        ForEach(0 ..< stripes(for: geometry.size)) { _ in
+                        ForEach(0 ..< stripes(for: geometry.size), id: \.self) { _ in
                             Rectangle()
                         }
                     }
