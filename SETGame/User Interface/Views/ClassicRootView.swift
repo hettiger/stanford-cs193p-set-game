@@ -1,5 +1,5 @@
 //
-//  RootView.swift
+//  ClassicRootView.swift
 //  SETGame
 //
 //  Created by Martin Hettiger on 31.01.21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RootView: View {
+struct ClassicRootView: View {
     @ObservedObject
     var game = ClassicSET.shared
 
@@ -62,8 +62,8 @@ struct RootView: View {
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RootView()
-            RootView()
+            ClassicRootView()
+            ClassicRootView()
                 .preferredColorScheme(.dark)
         }
     }

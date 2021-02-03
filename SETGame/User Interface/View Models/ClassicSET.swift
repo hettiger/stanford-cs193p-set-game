@@ -71,6 +71,9 @@ class ClassicSET: ObservableObject {
         cardsMatched.count / 3
     }
 
+    /// Returns one possible SET in `cardsVisible`.
+    ///
+    /// - TODO: This is causing frame drops if `cardsVisible.count` is too big.
     var hint: Cards {
         guard let firstSET = game.firstSET(cardsVisible) else { return [] }
         return [firstSET.0, firstSET.1, firstSET.2]

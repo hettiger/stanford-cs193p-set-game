@@ -33,7 +33,7 @@
 		5BD6A6E125C6AA0B00B2D7D0 /* ClassicGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */; };
 		5BD6A6E625C6AB9F00B2D7D0 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */; };
 		5BD6A6EB25C6AC0500B2D7D0 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */; };
-		5BD6A6F625C6B68700B2D7D0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6F525C6B68700B2D7D0 /* RootView.swift */; };
+		5BD6A6F625C6B68700B2D7D0 /* ClassicRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6A6F525C6B68700B2D7D0 /* ClassicRootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +85,7 @@
 		5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGameView.swift; sourceTree = "<group>"; };
 		5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		5BD6A6EA25C6AC0500B2D7D0 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
-		5BD6A6F525C6B68700B2D7D0 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		5BD6A6F525C6B68700B2D7D0 /* ClassicRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicRootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,9 +244,9 @@
 			children = (
 				5B3F09B325C5BA4D00A00FFF /* ClassicCardView.swift */,
 				5BD6A6E025C6AA0B00B2D7D0 /* ClassicGameView.swift */,
+				5BD6A6F525C6B68700B2D7D0 /* ClassicRootView.swift */,
 				5BB0D0AE25C87A580075B129 /* ClassicShapeView.swift */,
 				5BD6A6E525C6AB9F00B2D7D0 /* GridView.swift */,
-				5BD6A6F525C6B68700B2D7D0 /* RootView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,7 +431,7 @@
 				5B3F09CF25C5BFE000A00FFF /* ClassicSET.swift in Sources */,
 				5B4F531525C0813C0036EEBF /* SET.swift in Sources */,
 				5BD6A6E625C6AB9F00B2D7D0 /* GridView.swift in Sources */,
-				5BD6A6F625C6B68700B2D7D0 /* RootView.swift in Sources */,
+				5BD6A6F625C6B68700B2D7D0 /* ClassicRootView.swift in Sources */,
 				5B7FFA1E25C5FC7E00BBFF33 /* CGSize+Subscript.swift in Sources */,
 				5BD6A6EB25C6AC0500B2D7D0 /* GridLayout.swift in Sources */,
 				5B3F09C125C5BA9900A00FFF /* Squiggle.swift in Sources */,
