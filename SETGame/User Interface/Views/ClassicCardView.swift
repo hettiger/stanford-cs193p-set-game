@@ -22,16 +22,23 @@ struct ClassicCardView: View {
                     .shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
                 VStack(spacing: vStackSpacing(for: geometry.size)) {
                     ForEach(0 ..< card.number.rawValue) { _ in
-                        ClassicShapeView(shape: card.shape, shading: card.shading)
-                            .foregroundColor(card.color.value)
-                            .aspectRatio(shapeAspect.ratio, contentMode: .fit)
+                        ClassicShapeView(
+                            shape: card.shape,
+                            shading: card.shading,
+                            strokeWidth: strokeWidth(for: geometry.size)
+                        )
+                        .foregroundColor(card.color.value)
+                        .aspectRatio(shapeAspect.ratio, contentMode: .fit)
                     }
                 }
                 .padding(cardPadding(for: geometry.size))
                 // TODO: Stop showing hint per default
                 .opacity(game.hint.contains(card) ? 1 : 0.2)
                 RoundedRectangle(cornerRadius: cornerRadius(for: geometry.size))
-                    .strokeBorder(strokeColor(for: card))
+                    .strokeBorder(
+                        strokeColor(for: card),
+                        lineWidth: strokeWidth(for: geometry.size)
+                    )
                     .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
                     .foregroundColor(.clear)
             }
@@ -79,6 +86,10 @@ struct ClassicCardView: View {
         case (true, true, 3...): return .green
         default: return .clear
         }
+    }
+
+    func strokeWidth(for size: CGSize) -> CGFloat {
+        size.width / 120 * 4
     }
 }
 

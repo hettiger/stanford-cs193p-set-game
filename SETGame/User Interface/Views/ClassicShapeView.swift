@@ -10,49 +10,41 @@ import SwiftUI
 struct ClassicShapeView: View {
     var shape: ClassicSET.ShapeType
     var shading: ClassicSET.ShadingType
+    var strokeWidth: CGFloat
 
     var body: some View {
         switch shading {
         case .solid:
             shape.value.fill()
         case .open:
-            GeometryReader { geometry in
+            GeometryReader { _ in
                 shape.value
-                    .stroke(lineWidth: strokeWidth(for: geometry.size))
-                    .padding(padding(for: geometry.size))
+                    .stroke(lineWidth: strokeWidth)
+                    .padding(padding)
             }
         case .striped:
             GeometryReader { geometry in
                 ZStack {
-                    HStack(spacing: spacing(for: geometry.size)) {
+                    HStack(spacing: spacing) {
                         ForEach(0 ..< stripes(for: geometry.size), id: \.self) { _ in
                             Rectangle()
                         }
                     }
                     .clipShape(shape.value)
-                    shape.value.stroke(lineWidth: strokeWidth(for: geometry.size))
+                    shape.value.stroke(lineWidth: strokeWidth)
                 }
-                .padding(padding(for: geometry.size))
+                .padding(padding)
             }
         }
     }
 
     // MARK: - Drawing Constants
 
-    func spacing(for size: CGSize) -> CGFloat {
-        strokeWidth(for: size)
-    }
-
-    func padding(for size: CGSize) -> CGFloat {
-        strokeWidth(for: size) / 2
-    }
-
-    func strokeWidth(for size: CGSize) -> CGFloat {
-        size.width / 100 * 4
-    }
+    var spacing: CGFloat { strokeWidth }
+    var padding: CGFloat { strokeWidth / 2 }
 
     func stripes(for size: CGSize) -> Int {
-        Int(size.width / 1.5 / strokeWidth(for: size))
+        Int(size.width / 1.5 / strokeWidth)
     }
 }
 
@@ -61,7 +53,8 @@ struct ClassicShapeView_Previews: PreviewProvider {
         Group {
             ClassicShapeView(
                 shape: .squiggle,
-                shading: .striped
+                shading: .striped,
+                strokeWidth: 4
             ).frame(
                 width: 200,
                 height: 100,
@@ -69,7 +62,8 @@ struct ClassicShapeView_Previews: PreviewProvider {
             )
             ClassicShapeView(
                 shape: .diamond,
-                shading: .open
+                shading: .open,
+                strokeWidth: 4
             ).frame(
                 width: 200,
                 height: 100,
@@ -77,7 +71,8 @@ struct ClassicShapeView_Previews: PreviewProvider {
             )
             ClassicShapeView(
                 shape: .capsule,
-                shading: .solid
+                shading: .solid,
+                strokeWidth: 4
             ).frame(
                 width: 200,
                 height: 100,
