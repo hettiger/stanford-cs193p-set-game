@@ -44,7 +44,9 @@ struct ClassicShapeView: View {
     var padding: CGFloat { strokeWidth / 2 }
 
     func stripes(for size: CGSize) -> Int {
-        Int(size.width / 1.5 / strokeWidth)
+        let value: CGFloat = size.width / 1.5 / strokeWidth
+        guard value.isFinite else { return 0 }
+        return Int(value)
     }
 }
 
