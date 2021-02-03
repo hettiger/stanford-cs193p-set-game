@@ -51,7 +51,11 @@ class ClassicSET: ObservableObject {
     @Published
     private var game = Game() {
         didSet {
-            game.sets(game.cards.filter(\.isVisible)) { sets in
+            cardsVisible = game.cards.filter(\.isVisible)
+            cardsSelected = game.cards.filter(\.isSelected)
+            cardsMatched = game.cards.filter(\.isMatched)
+
+            game.sets(cardsVisible) { sets in
                 self.numberOfVisibleSETs = sets.count
             }
         }
@@ -59,14 +63,16 @@ class ClassicSET: ObservableObject {
 
     // MARK: - Model Accessors
 
-    var cards: Cards { game.cards }
+    var cardsVisible = Cards()
+    var cardsSelected = Cards()
+    var cardsMatched = Cards()
 
     var numberOfFoundSETs: Int {
-        cards.filter(\.isMatched).count / 3
+        cardsMatched.count / 3
     }
 
     var hint: Cards {
-        guard let firstSET = game.firstSET(cards.filter(\.isVisible)) else { return [] }
+        guard let firstSET = game.firstSET(cardsVisible) else { return [] }
         return [firstSET.0, firstSET.1, firstSET.2]
     }
 

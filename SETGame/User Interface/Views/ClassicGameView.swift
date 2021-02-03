@@ -15,12 +15,11 @@ struct ClassicGameView: View {
     var numberOfDealtCards = 0
 
     var body: some View {
-        let numberOfSelectedCards = game.cards.filter(\.isSelected).count
         Grid(
-            game.cards.filter(\.isVisible),
+            game.cardsVisible,
             desiredAspectRatio: DrawingConstants.cardAspect.ratio
         ) { card, index in
-            ClassicCardView(card: card, numberOfSelectedCards: numberOfSelectedCards)
+            ClassicCardView(card: card)
                 .onTapGesture(count: 1) { game.select(card) }
                 .padding()
                 .transition(transition(for: index))

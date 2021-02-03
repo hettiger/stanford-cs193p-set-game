@@ -43,7 +43,7 @@ struct Grid_Previews: PreviewProvider {
     static var previews: some View {
         let game = ClassicSET.shared
         game.deal()
-        return Grid(game.cards.filter(\.isVisible)) { card, _ in
+        return Grid(game.cardsVisible) { card, _ in
             ClassicCardView(card: card).padding()
         }
     }

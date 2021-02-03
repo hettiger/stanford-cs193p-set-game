@@ -12,7 +12,6 @@ struct ClassicCardView: View {
     var game = ClassicSET.shared
 
     var card: ClassicSET.Card
-    var numberOfSelectedCards = 0
 
     var body: some View {
         GeometryReader { geometry in
@@ -80,7 +79,7 @@ struct ClassicCardView: View {
     }
 
     func strokeColor(for card: ClassicSET.Card) -> Color {
-        switch (card.isSelected, card.isMatched, numberOfSelectedCards) {
+        switch (card.isSelected, card.isMatched, game.cardsSelected.count) {
         case (true, false, ...2): return .accentColor
         case (true, false, 3...): return .red
         case (true, true, 3...): return .green
