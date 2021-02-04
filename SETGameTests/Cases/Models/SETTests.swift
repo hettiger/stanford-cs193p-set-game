@@ -11,6 +11,7 @@ import XCTest
 
 class SETTests: XCTestCase {
     typealias Card = SETFake.Card
+    typealias Cards = [Card]
 
     var randomSourceFake: RandomSourceFake!
     var sut: SETFake!
@@ -33,7 +34,7 @@ class SETTests: XCTestCase {
         withCards([card])
     }
 
-    func withCards(_ cards: [Card]) {
+    func withCards(_ cards: Cards) {
         randomSourceFake.shuffle = { _ in
             cards
         }
@@ -73,9 +74,9 @@ class SETTests: XCTestCase {
     }
 
     func test_cards__returns_cards_in_random_order() {
-        var expectedCards = [Card]()
+        var expectedCards = Cards()
         randomSourceFake.shuffle = { cards in
-            let cards = cards as! [Card]
+            let cards = cards as! Cards
             XCTAssert(cards.count == 81)
             expectedCards = [cards[10], cards[11], cards[12]]
             return expectedCards
@@ -141,7 +142,7 @@ class SETTests: XCTestCase {
     func test_sets__with_all_cards__calls_back_with_1080_SETs_on_main_thread() {
         let exp = expectation(description: "sets calls callback with result")
 
-        var actualSETs: [(Card, Card, Card)]!
+        var actualSETs: [Cards]!
         var thread: Thread!
         sut.sets(sut.cards) { result in
             actualSETs = result

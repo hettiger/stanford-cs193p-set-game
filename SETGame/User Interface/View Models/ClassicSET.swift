@@ -56,7 +56,7 @@ class ClassicSET: ObservableObject {
             cardsMatched = game.cards.filter(\.isMatched)
 
             game.sets(cardsVisible) { sets in
-                self.visibleSETs = sets.map { cards in [cards.0, cards.1, cards.2] }
+                self.visibleSETs = sets
             }
         }
     }

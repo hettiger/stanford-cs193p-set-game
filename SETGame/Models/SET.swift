@@ -73,13 +73,11 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     /// Calls `callback` with all possible SETs found in `cards`
-    func sets(_ cards: Cards, callback: @escaping ([(Card, Card, Card)]) -> Void) {
+    func sets(_ cards: Cards, callback: @escaping ([Cards]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let sets = cards
                 .combinations(ofCount: 3)
-                .compactMap { cards -> (Card, Card, Card)? in
-                    isSET(cards) ? (cards[0], cards[1], cards[2]) : nil
-                }
+                .compactMap { cards in isSET(cards) ? cards : nil }
 
             DispatchQueue.main.async {
                 callback(sets)
