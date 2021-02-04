@@ -11,9 +11,6 @@ struct ClassicRootView: View {
     @ObservedObject
     var game = ClassicSET.shared
 
-    @State
-    var isPresentedMissingImplementationAlert = false
-
     var body: some View {
         NavigationView {
             ClassicGameView()
@@ -25,31 +22,20 @@ struct ClassicRootView: View {
                     }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button("New Game") {
-                            withAnimation {
-                                game.startNewGame()
-                            }
+                            withAnimation { game.startNewGame() }
                         }
                         .foregroundColor(.accentColor)
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
-                        Button("Hint (\(game.visibleSETs.count))") {
-                            isPresentedMissingImplementationAlert = true
+                        Button("Cheat (\(game.visibleSETs.count))") {
+                            withAnimation { game.cheat() }
                         }
                         Spacer()
                         Button("Deal Cards") {
-                            withAnimation {
-                                game.deal()
-                            }
+                            withAnimation { game.deal() }
                         }
                     }
                 }
-                .alert(isPresented: $isPresentedMissingImplementationAlert, content: {
-                    Alert(
-                        title: Text("Missing Implementation"),
-                        message: Text("Still working on this; please be patient."),
-                        dismissButton: .default(Text("OK"))
-                    )
-                })
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }

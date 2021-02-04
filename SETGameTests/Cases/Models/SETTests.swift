@@ -363,4 +363,16 @@ class SETTests: XCTestCase {
 
         XCTAssert(sut.cardsDealt.count == 12 + 3)
     }
+
+    // MARK: - Cheating
+
+    func test_isCheated__returns_false() {
+        XCTAssert(sut.isCheated == false)
+    }
+
+    func test_cheat__sets_isCheated_to_true() {
+        sut.cheat()
+
+        XCTAssert(sut.isCheated == true)
+    }
 }

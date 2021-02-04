@@ -36,6 +36,8 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
 
     private(set) var cards: Cards
 
+    private(set) var isCheated = false
+
     init(
         randomSource: RandomSource = MersenneTwisterRandomSource.shared
     ) {
@@ -147,6 +149,11 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         default:
             fatalError("invalid number of selected cards")
         }
+    }
+
+    /// Sets `isCheated` to `true`
+    mutating func cheat() {
+        isCheated = true
     }
 
     private mutating func setIsMatched(for cards: Cards) {

@@ -71,6 +71,10 @@ class ClassicSET: ObservableObject {
         cardsMatched.count / 3
     }
 
+    var isCheated: Bool {
+        game.isCheated
+    }
+
     @Published
     private(set) var visibleSETs = [Cards]()
 
@@ -82,6 +86,10 @@ class ClassicSET: ObservableObject {
 
     func deal() {
         game.deal()
+    }
+
+    func cheat() {
+        game.cheat()
     }
 
     func startNewGame() {

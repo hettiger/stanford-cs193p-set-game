@@ -31,8 +31,7 @@ struct ClassicCardView: View {
                     }
                 }
                 .padding(cardPadding(for: geometry.size))
-                // TODO: Stop showing hint per default
-                .opacity((game.visibleSETs.first?.contains(card) ?? false) ? 1 : 0.2)
+                .opacity(opacity)
                 RoundedRectangle(cornerRadius: cornerRadius(for: geometry.size))
                     .strokeBorder(
                         strokeColor(for: card),
@@ -43,6 +42,11 @@ struct ClassicCardView: View {
             }
         }
         .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
+    }
+
+    var opacity: Double {
+        guard game.isCheated, let hint = game.visibleSETs.first else { return 1 }
+        return hint.contains(card) ? 1 : 0.2
     }
 
     // MARK: - Drawing Constants
