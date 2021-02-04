@@ -32,7 +32,7 @@ struct ClassicCardView: View {
                 }
                 .padding(cardPadding(for: geometry.size))
                 // TODO: Stop showing hint per default
-                .opacity(game.hint.contains(card) ? 1 : 0.2)
+                .opacity((game.visibleSETs.first?.contains(card) ?? false) ? 1 : 0.2)
                 RoundedRectangle(cornerRadius: cornerRadius(for: geometry.size))
                     .strokeBorder(
                         strokeColor(for: card),

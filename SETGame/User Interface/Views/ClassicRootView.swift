@@ -32,7 +32,7 @@ struct ClassicRootView: View {
                         .foregroundColor(.accentColor)
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
-                        Button("Hint (\(game.numberOfVisibleSETs))") {
+                        Button("Hint (\(game.visibleSETs.count))") {
                             isPresentedMissingImplementationAlert = true
                         }
                         Spacer()

@@ -56,31 +56,23 @@ class ClassicSET: ObservableObject {
             cardsMatched = game.cards.filter(\.isMatched)
 
             game.sets(cardsVisible) { sets in
-                self.numberOfVisibleSETs = sets.count
+                self.visibleSETs = sets.map { cards in [cards.0, cards.1, cards.2] }
             }
         }
     }
 
     // MARK: - Model Accessors
 
-    var cardsVisible = Cards()
-    var cardsSelected = Cards()
-    var cardsMatched = Cards()
+    private(set) var cardsVisible = Cards()
+    private(set) var cardsSelected = Cards()
+    private(set) var cardsMatched = Cards()
 
     var numberOfFoundSETs: Int {
         cardsMatched.count / 3
     }
 
-    /// Returns one possible SET in `cardsVisible`.
-    ///
-    /// - TODO: This is causing frame drops if `cardsVisible.count` is too big.
-    var hint: Cards {
-        guard let firstSET = game.firstSET(cardsVisible) else { return [] }
-        return [firstSET.0, firstSET.1, firstSET.2]
-    }
-
     @Published
-    private(set) var numberOfVisibleSETs = 0
+    private(set) var visibleSETs = [Cards]()
 
     // MARK: - Intents
 
