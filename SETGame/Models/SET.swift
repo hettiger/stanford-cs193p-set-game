@@ -72,13 +72,6 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         return cards
     }
 
-    /// Returns first possible SET found in `cards`
-    func firstSET(_ cards: Cards) -> (Card, Card, Card)? {
-        guard let set = cards.combinations(ofCount: 3).first(where: { isSET($0) })
-        else { return nil }
-        return (set[0], set[1], set[2])
-    }
-
     /// Calls `callback` with all possible SETs found in `cards`
     func sets(_ cards: Cards, callback: @escaping ([(Card, Card, Card)]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {

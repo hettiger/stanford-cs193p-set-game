@@ -138,14 +138,6 @@ class SETTests: XCTestCase {
 
     // MARK: - Finding SETs
 
-    func test_firstSET__with_no_sets_in_cards__returns_nil() {
-        XCTAssert(sut.firstSET([]) == nil)
-    }
-
-    func test_firstSET__with_all_cards__returns_one_set() {
-        XCTAssert((sut.firstSET(sut.cards) as Any) is (Card, Card, Card))
-    }
-
     func test_sets__with_all_cards__calls_back_with_1080_SETs_on_main_thread() {
         let exp = expectation(description: "sets calls callback with result")
 
