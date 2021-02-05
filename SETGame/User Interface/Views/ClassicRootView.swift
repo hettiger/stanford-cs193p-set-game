@@ -34,6 +34,7 @@ struct ClassicRootView: View {
                         Button("Deal Cards") {
                             withAnimation { game.deal() }
                         }
+                        .disabled(game.cardsDeck.isEmpty)
                     }
                 }
         }

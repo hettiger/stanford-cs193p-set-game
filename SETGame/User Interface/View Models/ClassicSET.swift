@@ -51,6 +51,7 @@ class ClassicSET: ObservableObject {
     @Published
     private var game = Game() {
         didSet {
+            cardsDeck = game.cards.filter { !$0.isDealt }
             cardsVisible = game.cards.filter(\.isVisible)
             cardsSelected = game.cards.filter(\.isSelected)
             cardsMatched = game.cards.filter(\.isMatched)
@@ -63,6 +64,7 @@ class ClassicSET: ObservableObject {
 
     // MARK: - Model Accessors
 
+    private(set) var cardsDeck = Cards()
     private(set) var cardsVisible = Cards()
     private(set) var cardsSelected = Cards()
     private(set) var cardsMatched = Cards()
