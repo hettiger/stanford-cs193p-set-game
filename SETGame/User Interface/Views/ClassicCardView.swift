@@ -16,9 +16,7 @@ struct ClassicCardView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                RoundedRectangle(cornerRadius: cornerRadius(for: geometry.size))
-                    .foregroundColor(backgroundColor)
-                    .shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
+                emptyCard(for: geometry.size)
                 VStack(spacing: vStackSpacing(for: geometry.size)) {
                     ForEach(0 ..< card.number.rawValue) { _ in
                         ClassicShapeView(
@@ -32,17 +30,30 @@ struct ClassicCardView: View {
                 }
                 .padding(cardPadding(for: geometry.size))
                 .opacity(opacity)
-                RoundedRectangle(cornerRadius: cornerRadius(for: geometry.size))
-                    .strokeBorder(
-                        strokeColor(for: card),
-                        lineWidth: strokeWidth(for: geometry.size)
-                    )
-                    .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
-                    .foregroundColor(.clear)
-                    .animation(nil)
+                selectionHighlighting(for: geometry.size)
             }
         }
         .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
+    }
+
+    func emptyCard(for size: CGSize) -> some View {
+        RoundedRectangle(cornerRadius: cornerRadius(for: size))
+            .foregroundColor(backgroundColor)
+            .shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
+    }
+
+    @ViewBuilder
+    func selectionHighlighting(for size: CGSize) -> some View {
+        if card.isSelected {
+            RoundedRectangle(cornerRadius: cornerRadius(for: size))
+                .strokeBorder(
+                    strokeColor(for: card),
+                    lineWidth: strokeWidth(for: size)
+                )
+                .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
+                .foregroundColor(.clear)
+                .transition(.identity)
+        }
     }
 
     // MARK: - Drawing Constants
