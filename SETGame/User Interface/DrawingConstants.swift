@@ -13,4 +13,9 @@ enum DrawingConstants {
         let height: CGFloat = 8
         return (width, height, width / height)
     }
+    
+    /// Returns baseline animation duration multiplied by `x`
+    static func animationDuration(x: Double) -> Double {
+        x * 0.3
+    }
 }

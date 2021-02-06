@@ -22,17 +22,23 @@ struct ClassicRootView: View {
                     }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button("New Game") {
-                            withAnimation(.easeInOut(duration: 1.2)) { game.startNewGame() }
+                            withAnimation(.easeInOut(duration: animationDuration.newGame)) {
+                                game.startNewGame()
+                            }
                         }
                         .foregroundColor(.accentColor)
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
                         Button("Cheat (\(game.visibleSETs.count))") {
-                            withAnimation { game.cheat() }
+                            withAnimation(.linear(duration: animationDuration.cheat)) {
+                                game.cheat()
+                            }
                         }
                         Spacer()
                         Button("Deal Cards") {
-                            withAnimation(.easeInOut(duration: 0.9)) { game.deal() }
+                            withAnimation(.easeInOut(duration: animationDuration.deal)) {
+                                game.deal()
+                            }
                         }
                         .disabled(game.cardsDeck.isEmpty)
                     }
@@ -41,7 +47,9 @@ struct ClassicRootView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             DispatchQueue.main.async {
-                withAnimation(.easeInOut(duration: 2.4)) { game.deal() }
+                withAnimation(.easeInOut(duration: animationDuration.initialDeal)) {
+                    game.deal()
+                }
             }
         }
     }
@@ -49,6 +57,11 @@ struct ClassicRootView: View {
     // MARK: - Drawing Constants
 
     let backgroundColor = Color(UIColor.secondarySystemBackground)
+
+    var animationDuration: (newGame: Double, cheat: Double, deal: Double, initialDeal: Double) {
+        let fn = DrawingConstants.animationDuration
+        return (fn(4), fn(1), fn(3), fn(8))
+    }
 }
 
 struct RootView_Previews: PreviewProvider {

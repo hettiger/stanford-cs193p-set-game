@@ -18,7 +18,9 @@ struct ClassicGameView: View {
         ) { card in
             ClassicCardView(card: card)
                 .onTapGesture(count: 1) {
-                    withAnimation(.easeInOut(duration: 0.9)) { game.select(card) }
+                    withAnimation(.easeInOut(duration: selectAnimationDuration)) {
+                        game.select(card)
+                    }
                 }
                 .padding()
                 .transition(.offset(randomOffScreenOffset))
@@ -29,6 +31,12 @@ struct ClassicGameView: View {
         let screen = (width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         var factor: CGFloat { CGFloat([-1, 1].randomElement()!) }
         return CGSize(width: factor * screen.width, height: factor * screen.height)
+    }
+
+    // MARK: - Drawing Constants
+
+    var selectAnimationDuration: Double {
+        DrawingConstants.animationDuration(x: 3)
     }
 }
 

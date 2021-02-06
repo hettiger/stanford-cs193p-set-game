@@ -45,11 +45,6 @@ struct ClassicCardView: View {
         .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
     }
 
-    var opacity: Double {
-        guard game.isCheated, let hint = game.visibleSETs.first else { return 1 }
-        return hint.contains(card) ? 1 : 0.2
-    }
-
     // MARK: - Drawing Constants
 
     let backgroundColor = Color.white
@@ -59,6 +54,11 @@ struct ClassicCardView: View {
         let width: CGFloat = DrawingConstants.cardAspect.width
         let height: CGFloat = DrawingConstants.cardAspect.height / maxNumberOfShapes
         return (width, height, width / height)
+    }
+
+    var opacity: Double {
+        guard game.isCheated, let hint = game.visibleSETs.first else { return 1 }
+        return hint.contains(card) ? 1 : 0.2
     }
 
     let shadow: (color: Color, radius: CGFloat, x: CGFloat, y: CGFloat) = {
