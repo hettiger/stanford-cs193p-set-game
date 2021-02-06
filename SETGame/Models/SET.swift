@@ -119,7 +119,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
         let cardsToBeDealt = Array(cards[firstUndealtCardIndex...].prefix(3))
         setValue(true, forKey: \.isDealt, of: cardsToBeDealt)
 
-        // Swap dealt cards with `selection` if it is a SET
+        // Swap dealt cards with `selection` if it is a SET; then deselect `selection`.
         guard isSET(selection) else { return }
         for (setCard, dealtCard)
             in [Card: Card](uniqueKeysWithValues: zip(selection, cardsToBeDealt))
