@@ -34,6 +34,7 @@ struct ClassicRootView: View {
                                 game.cheat()
                             }
                         }
+                        .disabled(game.isCheated)
                         Spacer()
                         Button("Deal Cards") {
                             withAnimation(.easeInOut(duration: animationDuration.deal)) {
