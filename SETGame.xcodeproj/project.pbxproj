@@ -77,6 +77,7 @@
 		5B4F533B25C0940B0036EEBF /* Array+Shuffling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Shuffling.swift"; sourceTree = "<group>"; };
 		5B4F533C25C0940B0036EEBF /* MersenneTwisterRandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MersenneTwisterRandomSource.swift; sourceTree = "<group>"; };
 		5B4F534625C095070036EEBF /* RandomSourceFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomSourceFake.swift; sourceTree = "<group>"; };
+		5B72E01925CEE1E700094557 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5B7FFA1D25C5FC7E00BBFF33 /* CGSize+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Subscript.swift"; sourceTree = "<group>"; };
 		5B7FFA2225C5FCEB00BBFF33 /* CGSizeSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeSubscriptTests.swift; sourceTree = "<group>"; };
 		5BB0D0A625C874620075B129 /* DrawingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingConstants.swift; sourceTree = "<group>"; };
@@ -151,6 +152,7 @@
 		5B4F52BF25C07F250036EEBF = {
 			isa = PBXGroup;
 			children = (
+				5B72E01925CEE1E700094557 /* README.md */,
 				5B4F52CA25C07F250036EEBF /* SETGame */,
 				5B4F52DC25C07F270036EEBF /* SETGameTests */,
 				5B4F52E725C07F270036EEBF /* SETGameUITests */,
