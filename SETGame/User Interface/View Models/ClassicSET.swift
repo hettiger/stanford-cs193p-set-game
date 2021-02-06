@@ -51,11 +51,6 @@ class ClassicSET: ObservableObject {
     @Published
     private var game = Game() {
         didSet {
-            cardsDeck = game.cards.filter { !$0.isDealt }
-            cardsVisible = game.cards.filter(\.isVisible)
-            cardsSelected = game.cards.filter(\.isSelected)
-            cardsMatched = game.cards.filter(\.isMatched)
-
             game.sets(cardsVisible) { sets in
                 self.visibleSETs = sets
             }
@@ -64,18 +59,13 @@ class ClassicSET: ObservableObject {
 
     // MARK: - Model Accessors
 
-    private(set) var cardsDeck = Cards()
-    private(set) var cardsVisible = Cards()
-    private(set) var cardsSelected = Cards()
-    private(set) var cardsMatched = Cards()
+    var cardsDeck: Cards { game.cards.filter { !$0.isDealt } }
+    var cardsVisible: Cards { game.cards.filter(\.isVisible) }
+    var cardsSelected: Cards { game.cards.filter(\.isSelected) }
+    var cardsMatched: Cards { game.cards.filter(\.isMatched) }
 
-    var numberOfFoundSETs: Int {
-        cardsMatched.count / 3
-    }
-
-    var isCheated: Bool {
-        game.isCheated
-    }
+    var numberOfFoundSETs: Int { cardsMatched.count / 3 }
+    var isCheated: Bool { game.isCheated }
 
     @Published
     private(set) var visibleSETs = [Cards]()
