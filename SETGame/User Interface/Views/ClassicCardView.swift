@@ -39,6 +39,7 @@ struct ClassicCardView: View {
                     )
                     .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)
                     .foregroundColor(.clear)
+                    .animation(nil)
             }
         }
         .aspectRatio(DrawingConstants.cardAspect.ratio, contentMode: .fit)

@@ -22,7 +22,7 @@ struct ClassicRootView: View {
                     }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button("New Game") {
-                            withAnimation { game.startNewGame() }
+                            withAnimation(.easeInOut(duration: 1.2)) { game.startNewGame() }
                         }
                         .foregroundColor(.accentColor)
                     }
@@ -32,13 +32,18 @@ struct ClassicRootView: View {
                         }
                         Spacer()
                         Button("Deal Cards") {
-                            withAnimation { game.deal() }
+                            withAnimation(.easeInOut(duration: 0.9)) { game.deal() }
                         }
                         .disabled(game.cardsDeck.isEmpty)
                     }
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            DispatchQueue.main.async {
+                withAnimation(.easeInOut(duration: 2.4)) { game.deal() }
+            }
+        }
     }
 
     // MARK: - Drawing Constants
