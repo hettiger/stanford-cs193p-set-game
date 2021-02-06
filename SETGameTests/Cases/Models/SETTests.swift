@@ -174,8 +174,9 @@ class SETTests: XCTestCase {
         XCTAssert(sut.cards.prefix(expectedCount).filter(\.isDealt).count == expectedCount)
     }
 
-    func test_deal__with_dealt_cards_and_SET_selected__sets_first_3_undealt_cards_to_be_dealt_and_swaps_them_individually_with_the_SET_cards(
+    func test_deal__with_dealt_cards_and_SET_selected__sets_first_3_undealt_cards_to_be_dealt_swaps_them_individually_with_the_SET_cards_and_deselects_SET_cards(
     ) {
+        // with dealt cards and SET selected
         func cardToIndex(card: Card) -> Int { sut.cards.firstIndex(of: card)! }
         let set = [
             Card(color: .green, number: .one, shape: .diamond, shading: .open),
@@ -193,12 +194,24 @@ class SETTests: XCTestCase {
         let expectedIndices = set.map(cardToIndex)
         let expectedSETIndices = expectedCardsToBeDealt.map(cardToIndex)
 
+        // when `SET.deal()` is called
         sut.deal()
         let actualIndices = expectedCardsToBeDealt.map(cardToIndex)
         let actualSETIndices = set.map(cardToIndex)
 
+        // then sets first 3 undealt cards to be dealt
+        actualIndices.map { sut.cards[$0] }.forEach { card in
+            XCTAssert(card.isDealt == true)
+        }
+
+        // then swaps them individually with the SET cards
         XCTAssert(expectedIndices == actualIndices)
         XCTAssert(expectedSETIndices == actualSETIndices)
+
+        // then deselects SET cards
+        actualSETIndices.map { sut.cards[$0] }.forEach { card in
+            XCTAssert(card.isSelected == false)
+        }
     }
 
     // MARK: - Card Is Visible

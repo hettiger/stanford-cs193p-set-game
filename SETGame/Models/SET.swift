@@ -99,8 +99,11 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
     }
 
     /// Deals cards per the rules of SET; i.e. starts with 12 cards;
-    /// continues with 3 cards until whole deck of cards is dealt;
-    /// swaps dealt cards with `selection` if it is a SET.
+    /// continues with 3 cards until whole deck of cards is dealt.
+    ///
+    /// If current `selection` is a SET:
+    /// - Swaps dealt cards with `selection`
+    /// - Deselects `selection`
     ///
     /// Swapping of cards may help with replacing cards in the UI.
     mutating func deal() {
@@ -125,6 +128,7 @@ struct SET<ColorType, NumberType, ShapeType, ShadingType> where
             let dealtIndex = cards.firstIndex(of: dealtCard)!
             cards.swapAt(setIndex, dealtIndex)
         }
+        setValue(false, forKey: \.isSelected, of: selection)
     }
 
     /// Handles selection of `card` per the rules of SET;
