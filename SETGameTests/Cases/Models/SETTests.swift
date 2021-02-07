@@ -139,19 +139,23 @@ class SETTests: XCTestCase {
 
     // MARK: - Finding SETs
 
-    func test_sets__with_all_cards__calls_back_with_1080_SETs_on_main_thread() {
+    func test_sets__with_all_cards__calls_back_with_1080_SETs_and_cards_on_main_thread() {
         let exp = expectation(description: "sets calls callback with result")
+        let expectedCards = sut.cards
 
         var actualSETs: [Cards]!
+        var actualCards: Cards!
         var thread: Thread!
-        sut.sets(sut.cards) { result in
-            actualSETs = result
+        sut.sets(expectedCards) { sets, cards in
+            actualSETs = sets
+            actualCards = cards
             thread = Thread.current
             exp.fulfill()
         }
 
         wait(for: [exp], timeout: 5)
         XCTAssert(actualSETs.count == 1080)
+        XCTAssert(actualCards == expectedCards)
         XCTAssert(thread.isMainThread == true)
     }
 

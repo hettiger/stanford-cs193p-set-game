@@ -51,7 +51,8 @@ class ClassicSET: ObservableObject {
     @Published
     private var game = Game() {
         didSet {
-            game.sets(cardsVisible) { sets in
+            game.sets(cardsVisible) { sets, cards in
+                guard self.cardsVisible == cards else { return }
                 self.visibleSETs = sets
             }
         }
